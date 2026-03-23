@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Léon Becquet — Développeur Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --serif: 'Playfair Display', Georgia, serif;
+  --display: 'Syne', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-theme="light"] {
+  --bg:#FAFAF8;--bg-alt:#F2F0EB;--bg-card:#FFF;--bg-elevated:#F7F6F3;
+  --border:#E8E4DD;--border-light:#F0EDE8;--ink:#1A1A18;--ink-soft:#3D3D3A;--ink-muted:#8A877F;
+  --accent:#C75C3A;--accent-rgb:199,92,58;--accent-soft:rgba(199,92,58,.08);--accent-mid:rgba(199,92,58,.15);
+  --peach:#F0D5C4;--sage:#B5C4A8;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.04);--shadow-md:0 8px 30px rgba(0,0,0,.06);--shadow-lg:0 20px 60px rgba(0,0,0,.08);
+  --hero-gradient:linear-gradient(160deg,#FCF5F0 0%,#F5EDE6 40%,#EEF2ED 100%);
+  --pm1-bg:linear-gradient(160deg,#1a1028,#2a1540);--pm2-bg:linear-gradient(160deg,#EEF2ED,#E4EBE2);--pm3-bg:linear-gradient(160deg,#F0F0F5,#E6E6F0);
+  --process-bg:#1A1A18;--process-text:#FAFAF8;--process-muted:rgba(255,255,255,.45);--process-border:rgba(255,255,255,.08);--process-num:rgba(199,92,58,.15);
+}
+[data-theme="dark"] {
+  --bg:#111110;--bg-alt:#1A1A18;--bg-card:#1E1E1C;--bg-elevated:#242422;
+  --border:#2E2E2A;--border-light:#262624;--ink:#EDEBE6;--ink-soft:#C4C2BC;--ink-muted:#7A7870;
+  --accent:#E07A56;--accent-rgb:224,122,86;--accent-soft:rgba(224,122,86,.1);--accent-mid:rgba(224,122,86,.18);
+  --peach:#3D2A20;--sage:#253020;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.2);--shadow-md:0 8px 30px rgba(0,0,0,.3);--shadow-lg:0 20px 60px rgba(0,0,0,.4);
+  --hero-gradient:linear-gradient(160deg,#1A1510 0%,#181614 40%,#141816 100%);
+  --pm1-bg:linear-gradient(160deg,#120E1C,#1A1028);--pm2-bg:linear-gradient(160deg,#171C17,#161A16);--pm3-bg:linear-gradient(160deg,#18181C,#16161A);
+  --process-bg:#0A0A09;--process-text:#EDEBE6;--process-muted:rgba(237,235,230,.4);--process-border:rgba(255,255,255,.06);--process-num:rgba(224,122,86,.15);
+}
+html.transitioning,html.transitioning *,html.transitioning *::before,html.transitioning *::after{transition:background-color .5s var(--ease),color .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)!important}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+::selection{background:var(--peach);color:var(--ink)}
+.r{opacity:0;transform:translateY(30px);transition:all .9s var(--ease)}.r.v{opacity:1;transform:translateY(0)}
+.r-d1{transition-delay:.12s}.r-d2{transition-delay:.24s}.r-d3{transition-delay:.36s}.r-d4{transition-delay:.48s}
+@keyframes float1{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(-8px,-18px) rotate(2deg)}}
+@keyframes float2{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(10px,-14px) rotate(-1.5deg)}}
+@keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5px,-10px) scale(1.05)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,248,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light)}
+[data-theme="dark"] nav{background:rgba(17,17,16,.85)}
+.nav-left{display:flex;align-items:center;gap:.75rem}
+.nav-logo{width:36px;height:36px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1rem;font-weight:700;color:#fff}
+.nav-name{font-family:var(--serif);font-size:1rem;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.nav-center{display:flex;gap:2.5rem;list-style:none}
+.nav-center a{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:var(--ink-muted);position:relative;transition:color .3s}
+.nav-center a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--accent);transition:width .4s var(--ease)}
+.nav-center a:hover{color:var(--ink)}.nav-center a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.theme-toggle{width:52px;height:28px;border-radius:14px;background:var(--bg-elevated);border:1.5px solid var(--border);cursor:pointer;position:relative;transition:all .3s var(--ease);display:flex;align-items:center;padding:0 3px}
+.theme-toggle:hover{border-color:var(--accent)}
+.toggle-thumb{width:20px;height:20px;border-radius:50%;background:var(--accent);transition:transform .4s var(--ease);display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#fff;box-shadow:0 2px 8px rgba(var(--accent-rgb),.3)}
+[data-theme="dark"] .toggle-thumb{transform:translateX(24px)}
+.nav-cta{padding:.55rem 1.4rem;border-radius:100px;background:var(--ink);color:var(--bg);font-size:.75rem;font-weight:600;text-decoration:none;transition:all .3s var(--ease)}
+.nav-cta:hover{background:var(--accent);color:#fff}
+.nav-menu-btn{display:none;background:none;border:none;cursor:pointer;color:var(--ink)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:8rem 5rem 5rem;position:relative;z-index:2}
+.hero-greeting{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.hero-greeting::before{content:'';width:40px;height:1px;background:var(--accent)}
+.hero-title{font-family:var(--serif);font-size:clamp(3rem,5.5vw,4.8rem);font-weight:400;line-height:1.1;letter-spacing:-.03em;margin-bottom:1.5rem}
+.hero-title .line{display:block}
+.hero-title em{font-style:italic;color:var(--accent);position:relative}
+.hero-title em::after{content:'';position:absolute;bottom:4px;left:0;right:0;height:8px;background:var(--accent-soft);z-index:-1}
+.hero-typing{display:inline-flex;align-items:center;gap:2px;font-family:var(--mono);font-size:clamp(1rem,1.8vw,1.3rem);color:var(--accent);background:var(--accent-soft);padding:.3rem .8rem;border-radius:6px;margin-bottom:2rem;font-weight:500}
+.hero-typing .caret{width:2px;height:1.1em;background:var(--accent);animation:blink 1s infinite;margin-left:2px}
+.hero-desc{font-size:1.05rem;color:var(--ink-muted);max-width:440px;line-height:1.8;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 2rem;border-radius:100px;font-family:var(--display);font-size:.85rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .4s var(--ease)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(var(--accent-rgb),.25)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn .arrow{transition:transform .3s var(--ease)}.btn:hover .arrow{transform:translateX(4px)}
+.hero-stats{display:flex;gap:2.5rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+.stat-num{font-family:var(--serif);font-size:2rem;font-weight:500;color:var(--ink);letter-spacing:-.03em}
+.stat-label{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-muted);margin-top:.2rem}
+.hero-right{background:var(--hero-gradient);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-composition{width:80%;height:70%;position:relative}
+.hc-shape{position:absolute;border-radius:999px}
+.hc-blob1{width:300px;height:380px;background:var(--peach);top:5%;left:5%;animation:float1 7s ease-in-out infinite;opacity:.7}
+.hc-blob2{width:220px;height:220px;background:var(--sage);bottom:8%;right:0;animation:float2 8s ease-in-out infinite;opacity:.6}
+.hc-ring1{width:160px;height:160px;border:2px solid var(--accent);background:transparent;top:0;right:12%;animation:float3 6s ease-in-out infinite;opacity:.4}
+.hc-ring2{width:80px;height:80px;border:1.5px solid var(--ink-muted);background:transparent;bottom:25%;left:20%;animation:float2 9s ease-in-out infinite;opacity:.2}
+.hc-browser{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;background:var(--bg-card);border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden;z-index:2;animation:fadeUp .8s var(--ease) .5s both}
+.hc-browser-bar{height:34px;background:var(--bg-elevated);display:flex;align-items:center;padding:0 12px;gap:6px;border-bottom:1px solid var(--border-light)}
+.hc-dot{width:7px;height:7px;border-radius:50%}.hc-dot:nth-child(1){background:#F97066}.hc-dot:nth-child(2){background:#F5BF4F}.hc-dot:nth-child(3){background:#5DC653}
+.hc-url{margin-left:10px;font-family:var(--mono);font-size:.5rem;color:var(--ink-muted);background:var(--bg);padding:2px 10px;border-radius:4px}
+.hc-browser-body{padding:20px}
+.hc-code{font-family:var(--mono);font-size:.62rem;line-height:1.9;color:var(--ink-muted)}
+.hc-code .kw{color:var(--accent)}.hc-code .fn{color:#5B9BD5}[data-theme="dark"] .hc-code .fn{color:#7CB8E8}
+.hc-code .str{color:#6B9E6B}[data-theme="dark"] .hc-code .str{color:#8BC78B}.hc-code .cm{opacity:.5}.hc-code .indent{padding-left:1.2em}
+.hc-badge{position:absolute;bottom:15%;right:5%;background:var(--bg-card);border-radius:12px;padding:.8rem 1.2rem;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:.6rem;z-index:3;animation:fadeUp .8s var(--ease) .9s both}
+.hc-badge-dot{width:8px;height:8px;border-radius:50%;background:#5DC653;box-shadow:0 0 8px rgba(93,198,83,.4)}
+.hc-badge-text{font-family:var(--mono);font-size:.6rem;color:var(--ink-soft)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:5rem;display:flex;align-items:center;gap:.75rem;font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--ink-muted);z-index:2}
+.scroll-line{width:1px;height:40px;background:var(--accent);animation:scrollLine 2s infinite}
+
+/* SECTION HEADERS */
+.sh{margin-bottom:4.5rem}.sh-num{font-family:var(--mono);font-size:.65rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.75rem;display:block}
+.sh-title{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;line-height:1.15;letter-spacing:-.02em}.sh-title em{font-style:italic}
+
+/* ABOUT */
+.about{padding:9rem 0}
+.about-layout{display:grid;grid-template-columns:1fr 440px;gap:5rem;max-width:1200px;margin:0 auto;padding:0 5rem;align-items:start}
+.about-col-text{padding-top:2rem}
+.about-text{font-size:1.1rem;line-height:1.85;color:var(--ink-soft)}.about-text strong{color:var(--ink);font-weight:600}
+.about-card{background:var(--bg-alt);border-radius:20px;padding:2.5rem;position:relative;border:1px solid var(--border-light)}
+.about-card::before{content:'';position:absolute;top:-16px;right:-16px;width:64px;height:64px;border-radius:50%;background:var(--peach);z-index:-1}
+.about-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#E08A6E);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.5rem;color:#fff;font-weight:700;margin-bottom:1.25rem}
+.about-card h3{font-family:var(--serif);font-size:1.3rem;font-weight:500;margin-bottom:.3rem}
+.about-card .role{font-family:var(--mono);font-size:.68rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.5rem}
+.about-meta{display:flex;flex-direction:column;gap:.9rem;border-top:1px solid var(--border);padding-top:1.25rem}
+.about-meta-row{display:flex;justify-content:space-between;font-size:.83rem}
+.about-meta-label{color:var(--ink-muted);font-size:.73rem}.about-meta-value{font-weight:500}
+
+/* SERVICES */
+.services{padding:8rem 0;background:var(--bg-alt)}
+.services-inner{max-width:1200px;margin:0 auto;padding:0 5rem}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.service-item{background:var(--bg-card);border:1px solid var(--border-light);border-radius:18px;padding:2.5rem;transition:all .5s var(--ease);cursor:default}
+.service-item:hover{border-color:rgba(var(--accent-rgb),.25);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.service-item:hover .service-num{color:var(--accent)}
+.service-num{font-family:var(--serif);font-size:2.5rem;color:var(--border);transition:color .5s var(--ease);margin-bottom:1.25rem;line-height:1}
+.service-item h3{font-size:1.1rem;font-weight:600;margin-bottom:.7rem}
+.service-item p{font-size:.85rem;color:var(--ink-muted);line-height:1.7;max-width:340px}
+.service-techs{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem}
+.service-techs span{font-family:var(--mono);font-size:.58rem;letter-spacing:.04em;padding:.3rem .6rem;border-radius:100px;border:1px solid var(--border);color:var(--ink-muted);transition:all .3s}
+.service-item:hover .service-techs span{border-color:var(--accent-mid);color:var(--accent)}
+
+/* PROJETS */
+.projets{padding:9rem 0;max-width:1200px;margin:0 auto;padding-left:5rem;padding-right:5rem}
+.projet{display:grid;grid-template-columns:1.15fr 1fr;gap:5rem;align-items:center;margin-bottom:9rem}
+.projet:nth-child(even){grid-template-columns:1fr 1.15fr;direction:rtl}
+.projet:nth-child(even)>*{direction:ltr}
+.projet:last-child{margin-bottom:0}
+.projet-visual{aspect-ratio:4/3;border-radius:18px;overflow:hidden;cursor:pointer;border:1px solid var(--border-light)}
+.projet-visual:hover .projet-img{transform:scale(1.03)}
+.projet-img{width:100%;height:100%;transition:transform .7s var(--ease)}
+.pm{width:100%;height:100%;position:relative}
+
+/* ═══ SUPIFY MOCKUP — Music Social Network ═══ */
+.pm-supify{background:var(--pm1-bg);display:flex;align-items:center;justify-content:center}
+.supify-phone{width:52%;height:88%;background:#1C1428;border-radius:28px;border:2px solid rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.supify-status{height:28px;display:flex;justify-content:center;align-items:flex-end;padding-bottom:2px}
+.supify-notch{width:90px;height:18px;background:#111;border-radius:0 0 14px 14px}
+.supify-header{padding:10px 14px 8px;display:flex;justify-content:space-between;align-items:center}
+.supify-logo{font-family:var(--display);font-size:.85rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.supify-logo span{color:#A855F7}
+.supify-header-icons{display:flex;gap:8px}
+.supify-header-icon{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08)}
+.supify-feed{flex:1;padding:0 12px;overflow:hidden;display:flex;flex-direction:column;gap:10px}
+.supify-post{background:rgba(255,255,255,.04);border-radius:14px;padding:10px;border:1px solid rgba(255,255,255,.06)}
+.supify-post-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.supify-avatar-sm{width:24px;height:24px;border-radius:50%;flex-shrink:0}
+.supify-av1{background:linear-gradient(135deg,#A855F7,#EC4899)}
+.supify-av2{background:linear-gradient(135deg,#3B82F6,#06B6D4)}
+.supify-post-user{display:flex;flex-direction:column}
+.supify-post-name{font-size:.5rem;color:#fff;font-weight:600}
+.supify-post-time{font-size:.38rem;color:rgba(255,255,255,.35)}
+.supify-post-text{font-size:.42rem;color:rgba(255,255,255,.6);line-height:1.5;margin-bottom:8px}
+.supify-track{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);border-radius:10px;padding:8px;display:flex;align-items:center;gap:8px}
+.supify-album-art{width:36px;height:36px;border-radius:6px;flex-shrink:0}
+.supify-art1{background:linear-gradient(135deg,#7C3AED,#DB2777)}
+.supify-art2{background:linear-gradient(135deg,#F59E0B,#EF4444)}
+.supify-track-info{flex:1;min-width:0}
+.supify-track-name{font-size:.45rem;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.supify-track-artist{font-size:.38rem;color:rgba(255,255,255,.4)}
+.supify-waveform{display:flex;align-items:center;gap:1px;height:16px;margin-top:4px}
+.supify-waveform span{width:2px;border-radius:1px;background:#A855F7;opacity:.6}
+.supify-play{width:24px;height:24px;border-radius:50%;background:#A855F7;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.supify-play::after{content:'';width:0;height:0;border-left:6px solid #fff;border-top:4px solid transparent;border-bottom:4px solid transparent;margin-left:2px}
+.supify-actions{display:flex;gap:12px;margin-top:8px}
+.supify-action{display:flex;align-items:center;gap:3px;font-size:.38rem;color:rgba(255,255,255,.35)}
+.supify-action-icon{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.06)}
+.supify-nav-bar{height:44px;background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-around;align-items:center;padding:0 20px;flex-shrink:0}
+.supify-nav-item{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.08)}
+.supify-nav-item.active{background:#A855F7;opacity:.6}
+
+/* ═══ NUTRISCAN MOCKUP — Health App ═══ */
+.pm-nutriscan{background:var(--pm2-bg);display:flex;align-items:center;justify-content:center}
+.nutri-phone{width:48%;height:86%;background:#fff;border-radius:28px;border:2px solid var(--border);box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column}
+[data-theme="dark"] .nutri-phone{background:#1A1A18;border-color:#2E2E2A}
+.nutri-status{height:28px;display:flex;justify-content:center;align-items:flex-end;padding-bottom:2px}
+.nutri-notch{width:90px;height:18px;background:var(--bg);border-radius:0 0 14px 14px}
+.nutri-header{padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.nutri-title{font-family:var(--display);font-size:.75rem;font-weight:700;color:var(--ink)}
+.nutri-title span{color:#22C55E}
+.nutri-score-ring{width:16px;height:16px;border-radius:50%;border:2px solid #22C55E;position:relative}
+.nutri-body{flex:1;padding:0 12px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.nutri-scan-card{background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:1px solid #BBF7D0;border-radius:14px;padding:10px;text-align:center}
+[data-theme="dark"] .nutri-scan-card{background:linear-gradient(135deg,#14291A,#1A3320);border-color:#22543D}
+.nutri-scan-icon{width:32px;height:32px;border-radius:50%;border:2px solid #22C55E;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:.6rem}
+.nutri-scan-label{font-size:.42rem;color:var(--ink-muted);font-weight:500}
+.nutri-scan-score{font-family:var(--serif);font-size:1.2rem;color:#22C55E;font-weight:700}
+.nutri-macros{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
+.nutri-macro{background:var(--bg-elevated);border-radius:10px;padding:6px;text-align:center;border:1px solid var(--border-light)}
+.nutri-macro-val{font-size:.55rem;font-weight:700;color:var(--ink)}
+.nutri-macro-label{font-size:.35rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.05em}
+.nutri-macro-bar{height:3px;border-radius:2px;background:var(--border);margin-top:3px;overflow:hidden}
+.nutri-macro-bar span{display:block;height:100%;border-radius:2px}
+.nutri-product{background:var(--bg-elevated);border-radius:10px;padding:8px;display:flex;align-items:center;gap:8px;border:1px solid var(--border-light)}
+.nutri-product-img{width:30px;height:30px;border-radius:6px;background:linear-gradient(135deg,#FEF3C7,#FDE68A);flex-shrink:0}
+[data-theme="dark"] .nutri-product-img{background:linear-gradient(135deg,#3D2E10,#4D3A12)}
+.nutri-product-info{flex:1}
+.nutri-product-name{font-size:.45rem;font-weight:600;color:var(--ink)}
+.nutri-product-cal{font-size:.38rem;color:var(--ink-muted)}
+.nutri-product-grade{width:20px;height:20px;border-radius:50%;background:#22C55E;color:#fff;font-size:.4rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.nutri-bottom-bar{height:44px;background:var(--bg-card);border-top:1px solid var(--border-light);display:flex;justify-content:space-around;align-items:center;flex-shrink:0}
+.nutri-tab{width:18px;height:18px;border-radius:50%;background:var(--border)}
+.nutri-tab.active{background:#22C55E;opacity:.5}
+
+/* ═══ FORGE COACHING MOCKUP — Dashboard ═══ */
+.pm-forge{background:var(--pm3-bg);display:flex;align-items:center;justify-content:center}
+.forge-window{width:88%;height:82%;background:var(--bg-card);border-radius:12px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column}
+.forge-topbar{height:28px;background:var(--bg-elevated);display:flex;align-items:center;padding:0 10px;gap:5px;border-bottom:1px solid var(--border-light);flex-shrink:0}
+.forge-dot{width:6px;height:6px;border-radius:50%}
+.forge-dot:nth-child(1){background:#F97066}.forge-dot:nth-child(2){background:#F5BF4F}.forge-dot:nth-child(3){background:#5DC653}
+.forge-url{margin-left:8px;font-family:var(--mono);font-size:.45rem;color:var(--ink-muted);background:var(--bg);padding:1px 8px;border-radius:3px}
+.forge-layout{flex:1;display:grid;grid-template-columns:52px 1fr;overflow:hidden}
+.forge-sidebar{background:var(--bg-elevated);border-right:1px solid var(--border-light);display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0}
+.forge-side-icon{width:24px;height:24px;border-radius:6px;background:var(--border)}
+.forge-side-icon.active{background:var(--accent);opacity:.4}
+.forge-main{padding:12px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.forge-greeting{font-size:.5rem;color:var(--ink-muted)}
+.forge-greeting strong{color:var(--ink)}
+.forge-stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.forge-stat-card{background:var(--bg-elevated);border-radius:8px;padding:8px;border:1px solid var(--border-light)}
+.forge-stat-val{font-family:var(--serif);font-size:.7rem;font-weight:600;color:var(--ink)}
+.forge-stat-label{font-size:.32rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.05em}
+.forge-stat-trend{font-size:.3rem;color:#22C55E;margin-top:2px}
+.forge-chart-area{flex:1;background:var(--bg-elevated);border-radius:8px;padding:8px;border:1px solid var(--border-light);display:flex;flex-direction:column}
+.forge-chart-title{font-size:.4rem;color:var(--ink-muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.forge-chart-bars{flex:1;display:flex;align-items:flex-end;gap:3px}
+.forge-bar{flex:1;border-radius:3px 3px 0 0;min-height:2px;transition:height .5s var(--ease)}
+.forge-bar-primary{background:var(--accent);opacity:.35}
+.forge-bar-secondary{background:var(--sage);opacity:.4}
+[data-theme="dark"] .forge-bar-secondary{opacity:.6}
+.forge-sessions{display:flex;flex-direction:column;gap:3px}
+.forge-session{display:flex;align-items:center;gap:6px;background:var(--bg-elevated);border-radius:6px;padding:5px 8px;border:1px solid var(--border-light)}
+.forge-session-time{font-family:var(--mono);font-size:.35rem;color:var(--accent);width:32px}
+.forge-session-name{font-size:.38rem;color:var(--ink);font-weight:500;flex:1}
+.forge-session-badge{font-size:.3rem;padding:1px 5px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+
+.projet-type{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);margin-bottom:.9rem}
+.projet-name{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:400;margin-bottom:.9rem;letter-spacing:-.02em}
+.projet-desc{font-size:.92rem;color:var(--ink-muted);line-height:1.8;margin-bottom:1.5rem}
+.projet-stack{display:flex;flex-wrap:wrap;gap:.45rem}
+.projet-stack span{font-family:var(--mono);font-size:.58rem;letter-spacing:.04em;padding:.3rem .75rem;border-radius:100px;border:1px solid var(--border);color:var(--ink-muted)}
+.projet-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);text-decoration:none;transition:gap .3s var(--ease)}
+.projet-link:hover{gap:.8rem}
+
+/* PROCESS */
+.process{padding:8rem 0;background:var(--process-bg);color:var(--process-text)}
+.process .sh-num{color:rgba(var(--accent-rgb),.8)}.process .sh-title{color:var(--process-text)}
+.process-inner{max-width:1200px;margin:0 auto;padding:0 5rem}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--process-border);border-radius:16px;overflow:hidden}
+.process-item{padding:2.5rem 1.8rem;border-right:1px solid var(--process-border);transition:background .4s var(--ease)}
+.process-item:last-child{border-right:none}.process-item:hover{background:rgba(255,255,255,.03)}
+.process-item-num{font-family:var(--serif);font-size:3.5rem;color:var(--process-num);line-height:1;margin-bottom:1.5rem}
+.process-item h3{font-size:.95rem;font-weight:600;margin-bottom:.7rem}
+.process-item p{font-size:.8rem;color:var(--process-muted);line-height:1.7}
+
+/* CONTACT */
+.contact{padding:9rem 0}
+.contact-inner{max-width:1200px;margin:0 auto;padding:0 5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem}
+.contact-left h2{font-family:var(--serif);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:400;line-height:1.15;margin-bottom:1.25rem}
+.contact-left h2 em{font-style:italic;color:var(--accent)}
+.contact-left>p{font-size:.95rem;color:var(--ink-muted);line-height:1.8;margin-bottom:2.5rem}
+.contact-methods{display:flex;flex-direction:column;gap:.85rem}
+.contact-method{display:flex;align-items:center;gap:1.1rem;text-decoration:none;color:var(--ink);padding:1.1rem 1.3rem;border-radius:14px;background:var(--bg-alt);border:1px solid var(--border-light);transition:all .4s var(--ease)}
+.contact-method:hover{border-color:rgba(var(--accent-rgb),.2);transform:translateX(5px)}
+.contact-method-icon{width:38px;height:38px;border-radius:50%;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;border:1px solid var(--border)}
+.contact-method-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-muted);font-family:var(--mono);margin-bottom:2px}
+.contact-method-value{font-size:.9rem;font-weight:500}
+.contact-form{display:flex;flex-direction:column;gap:1.4rem}
+.contact-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.form-field label{display:block;font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-muted);margin-bottom:.5rem}
+.form-field input,.form-field textarea{width:100%;padding:.9rem 0;border:none;border-bottom:1.5px solid var(--border);background:transparent;font-family:var(--display);font-size:.92rem;color:var(--ink);outline:none;transition:border-color .3s}
+.form-field input:focus,.form-field textarea:focus{border-color:var(--accent)}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--ink-muted);opacity:.4}
+.form-field textarea{resize:none;min-height:100px}
+footer{padding:2.5rem 5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
+footer p{font-size:.73rem;color:var(--ink-muted)}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-muted);text-decoration:none;transition:color .3s}
+.footer-links a:hover{color:var(--accent)}
+
+/* ═══ MOBILE NAV DRAWER ═══ */
+.nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;pointer-events:none}
+.nav-drawer.open{pointer-events:auto}
+.nav-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity .3s var(--ease)}
+.nav-drawer.open .nav-overlay{opacity:1}
+.nav-drawer-content{position:absolute;top:0;right:0;width:280px;max-width:80vw;height:100%;background:var(--bg);border-left:1px solid var(--border);transform:translateX(100%);transition:transform .4s var(--ease);display:flex;flex-direction:column;padding:5rem 2rem 2rem}
+.nav-drawer.open .nav-drawer-content{transform:translateX(0)}
+.nav-drawer-links{display:flex;flex-direction:column;gap:.25rem;list-style:none}
+.nav-drawer-links a{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:var(--ink-muted);padding:.9rem .5rem;border-radius:10px;transition:all .3s var(--ease);display:block}
+.nav-drawer-links a:hover,.nav-drawer-links a:active{color:var(--accent);background:var(--accent-soft)}
+.nav-drawer-cta{margin-top:auto;padding:.9rem 2rem;border-radius:100px;background:var(--accent);color:#fff;font-size:.8rem;font-weight:600;text-decoration:none;text-align:center;transition:all .3s var(--ease)}
+.nav-close{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--ink-muted);transition:all .3s}
+.nav-close:hover{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+
+/* ═══ RESPONSIVE: 1024px ═══ */
+@media(max-width:1024px){
+  .hero-composition{width:90%;height:60%}
+  .about-layout{gap:3.5rem}
+  .projet{gap:3.5rem}
+}
+
+/* ═══ RESPONSIVE: 900px (tablet) ═══ */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-center,.nav-cta{display:none}
+  .nav-menu-btn{display:block}
+  .nav-drawer{display:block}
+
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:6.5rem 2rem 3rem}
+  .hero-right{min-height:50vh}
+  .hero-scroll{display:none}
+  .hero-stats{gap:2rem}
+  .hero-composition{width:85%;height:65%}
+
+  .about{padding:6rem 0}
+  .about-layout{grid-template-columns:1fr;padding:0 2rem;gap:2.5rem}
+  .about-col-text{padding-top:0}
+  .about-col-visual{max-width:400px}
+
+  .services{padding:6rem 0}
+  .services-inner{padding:0 2rem}
+  .services-grid{grid-template-columns:1fr}
+
+  .projets{padding:6rem 0;padding-left:2rem;padding-right:2rem}
+  .projet{grid-template-columns:1fr!important;gap:2.5rem;margin-bottom:5rem;direction:ltr!important}
+  .projet>*{direction:ltr!important}
+  .projet-visual{aspect-ratio:16/10}
+
+  .process{padding:6rem 0}
+  .process-inner{padding:0 2rem}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .process-item{border-bottom:1px solid var(--process-border)}
+
+  .contact{padding:6rem 0}
+  .contact-inner{grid-template-columns:1fr;padding:0 2rem;gap:3rem}
+  .contact-form-row{grid-template-columns:1fr 1fr}
+
+  footer{padding:2rem;flex-direction:column;gap:1rem;text-align:center}
+}
+
+/* ═══ RESPONSIVE: 600px (mobile) ═══ */
+@media(max-width:600px){
+  nav{padding:.9rem 1.25rem}
+  .nav-logo{width:32px;height:32px;font-size:.85rem}
+  .nav-name{font-size:.9rem}
+
+  .hero-left{padding:5.5rem 1.25rem 2rem}
+  .hero-title{font-size:clamp(2.2rem,9vw,3rem)}
+  .hero-typing{font-size:.85rem;padding:.25rem .6rem}
+  .hero-desc{font-size:.95rem;line-height:1.7}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:.75rem}
+  .btn{justify-content:center;padding:.85rem 1.5rem;font-size:.8rem}
+  .hero-stats{flex-direction:row;gap:1.5rem;flex-wrap:wrap}
+  .stat-num{font-size:1.5rem}
+  .hero-right{min-height:45vh}
+  .hero-composition{width:95%;height:70%}
+  .hc-browser{width:240px}
+  .hc-blob1{width:200px;height:260px}
+  .hc-blob2{width:150px;height:150px}
+  .hc-ring1{width:100px;height:100px}
+
+  .about{padding:4.5rem 0}
+  .about-layout{padding:0 1.25rem;gap:2rem}
+  .about-col-visual{max-width:100%}
+  .about-card{padding:2rem}
+  .sh{margin-bottom:3rem}
+  .sh-title{font-size:clamp(1.8rem,6vw,2.5rem)}
+
+  .services{padding:4.5rem 0}
+  .services-inner{padding:0 1.25rem}
+  .service-item{padding:2rem 1.5rem}
+
+  .projets{padding:4.5rem 0;padding-left:1.25rem;padding-right:1.25rem}
+  .projet{gap:2rem;margin-bottom:4rem}
+  .projet-visual{aspect-ratio:3/2}
+  .projet-name{font-size:1.5rem}
+  .supify-phone{width:58%;height:90%}
+  .nutri-phone{width:54%;height:88%}
+  .forge-window{width:92%;height:85%}
+
+  .process{padding:4.5rem 0}
+  .process-inner{padding:0 1.25rem}
+  .process-grid{grid-template-columns:1fr}
+  .process-item{padding:2rem 1.5rem;border-right:none;border-bottom:1px solid var(--process-border)}
+  .process-item:last-child{border-bottom:none}
+  .process-item-num{font-size:2.5rem;margin-bottom:1rem}
+
+  .contact{padding:4.5rem 0}
+  .contact-inner{padding:0 1.25rem;gap:2.5rem}
+  .contact-left h2{font-size:clamp(1.8rem,7vw,2.5rem)}
+  .contact-form-row{grid-template-columns:1fr}
+  .contact-method{padding:.9rem 1rem;gap:.9rem}
+  .contact-method-value{font-size:.8rem}
+
+  footer{padding:1.5rem 1.25rem}
+  .footer-links{gap:1.25rem}
+}
+
+/* ═══ RESPONSIVE: 400px (small mobile) ═══ */
+@media(max-width:400px){
+  .hero-left{padding:5rem 1rem 1.5rem}
+  .hero-title{font-size:2rem}
+  .hero-typing{font-size:.75rem}
+  .hero-stats{gap:1rem}
+  .stat-num{font-size:1.3rem}
+  .stat-label{font-size:.5rem}
+  .hc-browser{width:200px;border-radius:10px}
+  .hc-code{font-size:.5rem}
+  .hc-badge{padding:.6rem .9rem;bottom:10%;right:2%}
+  .hc-badge-text{font-size:.5rem}
+
+  .about-layout,.services-inner,.projets,.process-inner,.contact-inner{padding-left:1rem!important;padding-right:1rem!important}
+  .about-card{padding:1.5rem}
+  .about-avatar{width:56px;height:56px;font-size:1.2rem}
+  .about-card h3{font-size:1.1rem}
+  .service-item{padding:1.5rem 1.25rem}
+  .service-num{font-size:2rem}
+
+  .supify-phone{width:64%;height:92%}
+  .nutri-phone{width:60%;height:90%}
+
+  .projet-name{font-size:1.3rem}
+  .projet-desc{font-size:.85rem}
+  .projet-stack span{font-size:.5rem;padding:.2rem .5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left"><div class="nav-logo">LB</div><a href="#" class="nav-name">Léon Becquet</a></div>
+  <ul class="nav-center"><li><a href="#about">À propos</a></li><li><a href="#services">Services</a></li><li><a href="#projets">Projets</a></li><li><a href="#contact">Contact</a></li></ul>
+  <div class="nav-right">
+    <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Changer de thème"><div class="toggle-thumb" id="toggleThumb">☀</div></div>
+    <a href="#contact" class="nav-cta">Parlons-en</a>
+  </div>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Menu"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="19" y2="7"/><line x1="3" y1="15" x2="19" y2="15"/></svg></button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-overlay" id="navOverlay"></div>
+  <div class="nav-drawer-content">
+    <button class="nav-close" id="navClose">✕</button>
+    <ul class="nav-drawer-links">
+      <li><a href="#about" class="drawer-link">À propos</a></li>
+      <li><a href="#services" class="drawer-link">Services</a></li>
+      <li><a href="#projets" class="drawer-link">Projets</a></li>
+      <li><a href="#contact" class="drawer-link">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-drawer-cta drawer-link">Parlons-en →</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-greeting r">Salut, moi c'est Léon</div>
+    <h1 class="hero-title r r-d1"><span class="line">Développeur web</span><span class="line"><em>créatif</em> & passionné</span></h1>
+    <div class="hero-typing r r-d2"><span id="typingText"></span><span class="caret"></span></div>
+    <p class="hero-desc r r-d3">Je conçois et développe des applications web sur mesure — alliant design soigné, code propre et expériences utilisateur mémorables.</p>
+    <div class="hero-actions r r-d4">
+      <a href="#projets" class="btn btn-primary">Voir mes projets <span class="arrow">→</span></a>
+      <a href="#contact" class="btn btn-ghost">Me contacter</a>
+    </div>
+    <div class="hero-stats r r-d4">
+      <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Ans d'expérience</div></div>
+      <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Projets livrés</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Satisfaction</div></div>
+    </div>
+    <div class="hero-scroll"><div class="scroll-line"></div> Scroll</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-composition">
+      <div class="hc-shape hc-blob1"></div><div class="hc-shape hc-blob2"></div><div class="hc-shape hc-ring1"></div><div class="hc-shape hc-ring2"></div>
+      <div class="hc-browser">
+        <div class="hc-browser-bar"><div class="hc-dot"></div><div class="hc-dot"></div><div class="hc-dot"></div><span class="hc-url">leon-becquet.dev</span></div>
+        <div class="hc-browser-body">
+          <div class="hc-code"><span class="cm">// création en cours...</span><br><span class="kw">const</span> <span class="fn">developer</span> = {<br><span class="indent"><span class="kw">name</span>: <span class="str">"Léon Becquet"</span>,</span><br><span class="indent"><span class="kw">passion</span>: <span class="str">"web créatif"</span>,</span><br><span class="indent"><span class="kw">stack</span>: [<span class="str">"React"</span>, <span class="str">"Node"</span>, <span class="str">"TS"</span>],</span><br><span class="indent"><span class="kw">available</span>: <span class="fn">true</span></span><br>};</div>
+        </div>
+      </div>
+      <div class="hc-badge"><div class="hc-badge-dot"></div><div class="hc-badge-text">Disponible pour projets</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-layout">
+    <div class="about-col-text">
+      <div class="sh r"><span class="sh-num">01</span><h2 class="sh-title">Un développeur<br>qui pense <em>design</em></h2></div>
+      <p class="about-text r r-d1">Depuis <strong>plus de 4 ans</strong>, je crée des expériences numériques pour des startups, agences et entreprises. Mon approche hybride — entre <strong>code et créativité</strong> — me permet de livrer des projets qui ne se contentent pas de fonctionner : ils <strong>marquent les esprits</strong>.<br><br>Je crois que le meilleur code est celui qui sert une vision. Chaque projet est une opportunité de repousser les limites du web.</p>
+    </div>
+    <div class="about-col-visual r r-d2">
+      <div class="about-card">
+        <div class="about-avatar">LB</div>
+        <h3>Léon Becquet</h3><div class="role">Développeur Web Fullstack</div>
+        <div class="about-meta">
+          <div class="about-meta-row"><span class="about-meta-label">Localisation</span><span class="about-meta-value">France 🇫🇷</span></div>
+          <div class="about-meta-row"><span class="about-meta-label">Expérience</span><span class="about-meta-value">+4 ans</span></div>
+          <div class="about-meta-row"><span class="about-meta-label">Stack principale</span><span class="about-meta-value">React / Node / TS</span></div>
+          <div class="about-meta-row"><span class="about-meta-label">Disponibilité</span><span class="about-meta-value" style="color:var(--accent)">Ouvert aux projets</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="sh r"><span class="sh-num">02</span><h2 class="sh-title">Ce que je <em>fais</em></h2></div>
+    <div class="services-grid">
+      <div class="service-item r"><div class="service-num">01</div><h3>Frontend Développement</h3><p>Interfaces réactives, accessibles et animées avec soin. Du composant au design system complet.</p><div class="service-techs"><span>React</span><span>Next.js</span><span>Vue</span><span>TypeScript</span></div></div>
+      <div class="service-item r"><div class="service-num">02</div><h3>Backend & API</h3><p>Architecture scalable, APIs robustes et bases de données optimisées pour vos besoins.</p><div class="service-techs"><span>Node.js</span><span>PostgreSQL</span><span>GraphQL</span><span>REST</span></div></div>
+      <div class="service-item r"><div class="service-num">03</div><h3>UI / UX Design</h3><p>Design d'interfaces pensées pour l'utilisateur. Prototypage rapide et design systems cohérents.</p><div class="service-techs"><span>Figma</span><span>Prototyping</span><span>Design System</span></div></div>
+      <div class="service-item r"><div class="service-num">04</div><h3>Performance & DevOps</h3><p>Optimisation, déploiement automatisé et monitoring pour des applications fiables et rapides.</p><div class="service-techs"><span>Docker</span><span>AWS</span><span>Vercel</span><span>CI/CD</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="projets" id="projets">
+  <div class="sh r"><span class="sh-num">03</span><h2 class="sh-title">Projets<br><em>sélectionnés</em></h2></div>
+
+  <!-- SUPIFY -->
+  <div class="projet r">
+    <div class="projet-visual">
+      <div class="projet-img">
+        <div class="pm pm-supify">
+          <div class="supify-phone">
+            <div class="supify-status"><div class="supify-notch"></div></div>
+            <div class="supify-header">
+              <div class="supify-logo">Sup<span>ify</span></div>
+              <div class="supify-header-icons"><div class="supify-header-icon"></div><div class="supify-header-icon"></div></div>
+            </div>
+            <div class="supify-feed">
+              <div class="supify-post">
+                <div class="supify-post-header"><div class="supify-avatar-sm supify-av1"></div><div class="supify-post-user"><div class="supify-post-name">Marie L.</div><div class="supify-post-time">il y a 2h</div></div></div>
+                <div class="supify-post-text">Ce nouveau son est incroyable 🔥</div>
+                <div class="supify-track">
+                  <div class="supify-album-art supify-art1"></div>
+                  <div class="supify-track-info">
+                    <div class="supify-track-name">Midnight Dreams</div>
+                    <div class="supify-track-artist">Nova Eclipse</div>
+                    <div class="supify-waveform"><span style="height:4px"></span><span style="height:8px"></span><span style="height:12px"></span><span style="height:6px"></span><span style="height:14px"></span><span style="height:10px"></span><span style="height:16px"></span><span style="height:8px"></span><span style="height:12px"></span><span style="height:5px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:9px"></span><span style="height:13px"></span><span style="height:6px"></span></div>
+                  </div>
+                  <div class="supify-play"></div>
+                </div>
+                <div class="supify-actions"><div class="supify-action"><div class="supify-action-icon"></div>234</div><div class="supify-action"><div class="supify-action-icon"></div>18</div><div class="supify-action"><div class="supify-action-icon"></div>Partager</div></div>
+              </div>
+              <div class="supify-post">
+                <div class="supify-post-header"><div class="supify-avatar-sm supify-av2"></div><div class="supify-post-user"><div class="supify-post-name">Alex T.</div><div class="supify-post-time">il y a 5h</div></div></div>
+                <div class="supify-track">
+                  <div class="supify-album-art supify-art2"></div>
+                  <div class="supify-track-info">
+                    <div class="supify-track-name">Solar Flare</div>
+                    <div class="supify-track-artist">Ember Wave</div>
+                    <div class="supify-waveform"><span style="height:6px"></span><span style="height:10px"></span><span style="height:8px"></span><span style="height:14px"></span><span style="height:4px"></span><span style="height:12px"></span><span style="height:9px"></span><span style="height:15px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:5px"></span></div>
+                  </div>
+                  <div class="supify-play"></div>
+                </div>
+              </div>
+            </div>
+            <div class="supify-nav-bar"><div class="supify-nav-item active"></div><div class="supify-nav-item"></div><div class="supify-nav-item"></div><div class="supify-nav-item"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="projet-info">
+      <div class="projet-type">Réseau Social / Musique</div>
+      <h3 class="projet-name">Supify</h3>
+      <p class="projet-desc">Réseau social dédié à la musique : partage de morceaux, feed personnalisé, lecteur intégré avec waveform, likes, commentaires et découverte d'artistes. Une communauté de passionnés.</p>
+      <div class="projet-stack"><span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>WebSocket</span><span>TailwindCSS</span></div>
+      <a href="https://supify.fr/" target="_blank" class="projet-link">Voir le projet →</a>
+    </div>
+  </div>
+
+  <!-- NUTRISCAN -->
+  <div class="projet r">
+    <div class="projet-visual">
+      <div class="projet-img">
+        <div class="pm pm-nutriscan">
+          <div class="nutri-phone">
+            <div class="nutri-status"><div class="nutri-notch"></div></div>
+            <div class="nutri-header"><div class="nutri-title">Nutri<span>Scan</span></div><div class="nutri-score-ring"></div></div>
+            <div class="nutri-body">
+              <div class="nutri-scan-card"><div class="nutri-scan-icon">📷</div><div class="nutri-scan-label">Score nutritionnel</div><div class="nutri-scan-score">82/100</div></div>
+              <div class="nutri-macros">
+                <div class="nutri-macro"><div class="nutri-macro-val">42g</div><div class="nutri-macro-label">Protéines</div><div class="nutri-macro-bar"><span style="width:72%;background:#22C55E"></span></div></div>
+                <div class="nutri-macro"><div class="nutri-macro-val">28g</div><div class="nutri-macro-label">Glucides</div><div class="nutri-macro-bar"><span style="width:45%;background:#3B82F6"></span></div></div>
+                <div class="nutri-macro"><div class="nutri-macro-val">12g</div><div class="nutri-macro-label">Lipides</div><div class="nutri-macro-bar"><span style="width:30%;background:#F59E0B"></span></div></div>
+              </div>
+              <div class="nutri-product"><div class="nutri-product-img"></div><div class="nutri-product-info"><div class="nutri-product-name">Granola Bio Amandes</div><div class="nutri-product-cal">342 kcal · 100g</div></div><div class="nutri-product-grade">A</div></div>
+              <div class="nutri-product"><div class="nutri-product-img" style="background:linear-gradient(135deg,#DBEAFE,#BFDBFE)"></div><div class="nutri-product-info"><div class="nutri-product-name">Yaourt Grec Nature</div><div class="nutri-product-cal">97 kcal · 100g</div></div><div class="nutri-product-grade" style="background:#3B82F6">B</div></div>
+            </div>
+            <div class="nutri-bottom-bar"><div class="nutri-tab"></div><div class="nutri-tab active"></div><div class="nutri-tab"></div><div class="nutri-tab"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="projet-info">
+      <div class="projet-type">App Mobile / Santé</div>
+      <h3 class="projet-name">NutriScan</h3>
+      <p class="projet-desc">Application de scan alimentaire qui analyse les valeurs nutritionnelles en temps réel. Score santé, suivi des macronutriments et historique de scans pour une alimentation éclairée.</p>
+      <div class="projet-stack"><span>React Native</span><span>Node.js</span><span>MongoDB</span><span>API Vision</span></div>
+    </div>
+  </div>
+
+  <!-- FORGE COACHING -->
+  <div class="projet r">
+    <div class="projet-visual">
+      <div class="projet-img">
+        <div class="pm pm-forge">
+          <div class="forge-window">
+            <div class="forge-topbar"><div class="forge-dot"></div><div class="forge-dot"></div><div class="forge-dot"></div><span class="forge-url">forge-coaching.app</span></div>
+            <div class="forge-layout">
+              <div class="forge-sidebar"><div class="forge-side-icon active"></div><div class="forge-side-icon"></div><div class="forge-side-icon"></div><div class="forge-side-icon"></div></div>
+              <div class="forge-main">
+                <div class="forge-greeting">Bonjour, <strong>Coach Martin</strong></div>
+                <div class="forge-stats-row">
+                  <div class="forge-stat-card"><div class="forge-stat-val">24</div><div class="forge-stat-label">Clients actifs</div><div class="forge-stat-trend">↑ +3 ce mois</div></div>
+                  <div class="forge-stat-card"><div class="forge-stat-val">89%</div><div class="forge-stat-label">Objectifs atteints</div><div class="forge-stat-trend">↑ +5%</div></div>
+                  <div class="forge-stat-card"><div class="forge-stat-val">156</div><div class="forge-stat-label">Séances ce mois</div><div class="forge-stat-trend">↑ +12</div></div>
+                </div>
+                <div class="forge-chart-area">
+                  <div class="forge-chart-title">Progression clients</div>
+                  <div class="forge-chart-bars">
+                    <div class="forge-bar forge-bar-primary" style="height:30%"></div><div class="forge-bar forge-bar-secondary" style="height:45%"></div>
+                    <div class="forge-bar forge-bar-primary" style="height:50%"></div><div class="forge-bar forge-bar-secondary" style="height:55%"></div>
+                    <div class="forge-bar forge-bar-primary" style="height:40%"></div><div class="forge-bar forge-bar-secondary" style="height:70%"></div>
+                    <div class="forge-bar forge-bar-primary" style="height:65%"></div><div class="forge-bar forge-bar-secondary" style="height:80%"></div>
+                    <div class="forge-bar forge-bar-primary" style="height:75%"></div><div class="forge-bar forge-bar-secondary" style="height:90%"></div>
+                    <div class="forge-bar forge-bar-primary" style="height:85%"></div><div class="forge-bar forge-bar-secondary" style="height:95%"></div>
+                  </div>
+                </div>
+                <div class="forge-sessions">
+                  <div class="forge-session"><div class="forge-session-time">09:00</div><div class="forge-session-name">Sophie D. — Bilan mensuel</div><div class="forge-session-badge">Aujourd'hui</div></div>
+                  <div class="forge-session"><div class="forge-session-time">11:30</div><div class="forge-session-name">Marc R. — Suivi objectifs</div><div class="forge-session-badge">Aujourd'hui</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="projet-info">
+      <div class="projet-type">SaaS / Coaching</div>
+      <h3 class="projet-name">Forge Coaching</h3>
+      <p class="projet-desc">Plateforme SaaS de suivi coaching avec dashboard personnalisé, planification de séances, suivi des objectifs et messagerie intégrée entre coach et client.</p>
+      <div class="projet-stack"><span>Vue.js</span><span>Firebase</span><span>TailwindCSS</span><span>Stripe</span><span>PWA</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="process-inner">
+    <div class="sh r"><span class="sh-num">04</span><h2 class="sh-title">Mon <em>process</em></h2></div>
+    <div class="process-grid">
+      <div class="process-item r"><div class="process-item-num">01</div><h3>Découverte</h3><p>Échange approfondi, compréhension des objectifs et définition du périmètre projet.</p></div>
+      <div class="process-item r r-d1"><div class="process-item-num">02</div><h3>Conception</h3><p>Wireframes, maquettes interactives et validation de l'architecture technique.</p></div>
+      <div class="process-item r r-d2"><div class="process-item-num">03</div><h3>Développement</h3><p>Code propre et testé. Sprints réguliers avec démos pour rester alignés.</p></div>
+      <div class="process-item r r-d3"><div class="process-item-num">04</div><h3>Lancement</h3><p>Déploiement, monitoring et optimisation continue post-lancement.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left r">
+      <div class="sh"><span class="sh-num">05</span></div>
+      <h2>Créons quelque chose d'<em>exceptionnel</em></h2>
+      <p>Un projet, une idée ? Écrivez-moi. Toujours partant pour de nouvelles collaborations.</p>
+      <div class="contact-methods">
+        <a href="/cdn-cgi/l/email-protection#0d61686263236f686e7c7868793434344d6a606c6461236e6260" class="contact-method"><div class="contact-method-icon">✉</div><div><div class="contact-method-label">Email</div><div class="contact-method-value"><span class="__cf_email__" data-cfemail="167a73797838747375676373622f2f2f56717b777f7a3875797b">[email&#160;protected]</span></div></div></a>
+        <a href="#" class="contact-method"><div class="contact-method-icon">↗</div><div><div class="contact-method-label">GitHub</div><div class="contact-method-value">github.com/leon-becquet</div></div></a>
+        <a href="#" class="contact-method"><div class="contact-method-icon">in</div><div><div class="contact-method-label">LinkedIn</div><div class="contact-method-value">linkedin.com/in/leon-becquet</div></div></a>
+      </div>
+    </div>
+    <div class="contact-form r r-d1">
+      <div class="contact-form-row"><div class="form-field"><label>Nom</label><input type="text" placeholder="Votre nom"></div><div class="form-field"><label>Email</label><input type="email" placeholder="votre@email.com"></div></div>
+      <div class="form-field"><label>Sujet</label><input type="text" placeholder="Nouveau projet, collaboration..."></div>
+      <div class="form-field"><label>Message</label><textarea placeholder="Parlez-moi de votre projet..."></textarea></div>
+      <button class="btn btn-primary" style="align-self:flex-start">Envoyer <span class="arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 — Léon Becquet</p><div class="footer-links"><a href="#">GitHub</a><a href="#">LinkedIn</a><a href="#">Dribbble</a></div></footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const toggle=document.getElementById('themeToggle'),thumb=document.getElementById('toggleThumb'),html=document.documentElement;
+const saved=localStorage.getItem('theme');if(saved){html.setAttribute('data-theme',saved);thumb.textContent=saved==='dark'?'☾':'☀'}
+toggle.addEventListener('click',()=>{html.classList.add('transitioning');const n=html.getAttribute('data-theme')==='light'?'dark':'light';html.setAttribute('data-theme',n);thumb.textContent=n==='dark'?'☾':'☀';localStorage.setItem('theme',n);setTimeout(()=>html.classList.remove('transitioning'),600)});
+const phrases=['React & Next.js','UI/UX Design','Node.js & APIs','TypeScript','Performance Web'];let pi=0,ci=0,del=false;const te=document.getElementById('typingText');
+function typeLoop(){const c=phrases[pi];te.textContent=c.substring(0,ci);if(!del){ci++;if(ci>c.length){del=true;setTimeout(typeLoop,2000);return}}else{ci--;if(ci===0){del=false;pi=(pi+1)%phrases.length}}setTimeout(typeLoop,del?40:80)}setTimeout(typeLoop,1000);
+// Reveal: trigger immediately for elements in viewport, observe the rest
+const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:0.05,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.r').forEach(el=>{
+  const rect=el.getBoundingClientRect();
+  if(rect.top<window.innerHeight&&rect.bottom>0){el.classList.add('v')}
+  else{obs.observe(el)}
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+// Mobile drawer
+const drawer=document.getElementById('navDrawer'),overlay=document.getElementById('navOverlay'),closeBtn=document.getElementById('navClose');
+const menuBtn=document.getElementById('menuBtn');
+function openDrawer(){drawer.classList.add('open');document.body.style.overflow='hidden'}
+function closeDrawer(){drawer.classList.remove('open');document.body.style.overflow=''}
+menuBtn

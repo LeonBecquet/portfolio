@@ -445,6 +445,50 @@ footer p{font-size:.73rem;color:var(--ink-muted)}
   .projet-desc{font-size:.85rem}
   .projet-stack span{font-size:.5rem;padding:.2rem .5rem}
 }
+
+/* PROJECT PREVIEW */
+.projet-actions{display:flex;gap:.8rem;align-items:center;margin-top:1.5rem;flex-wrap:wrap}
+.projet-actions .projet-link{margin-top:0}
+.preview-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:100px;background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;border:none;cursor:pointer;transition:all .35s var(--ease)}
+.preview-btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(var(--accent-rgb),.25)}
+.preview-btn .preview-dot{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px rgba(255,255,255,.15)}
+
+.preview-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:4rem 3rem;background:rgba(10,10,9,.72);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
+.preview-modal.open{opacity:1;pointer-events:auto}
+.preview-dialog{width:100%;max-width:1200px;height:100%;max-height:760px;background:var(--bg-card);border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;transform:translateY(24px) scale(.97);transition:transform .5s var(--ease)}
+.preview-modal.open .preview-dialog{transform:translateY(0) scale(1)}
+.preview-topbar{display:flex;align-items:center;gap:.75rem;padding:.9rem 1.2rem;background:var(--bg-elevated);border-bottom:1px solid var(--border-light)}
+.preview-dots{display:flex;gap:6px}
+.preview-dots span{width:11px;height:11px;border-radius:50%}
+.preview-dots span:nth-child(1){background:#F97066}
+.preview-dots span:nth-child(2){background:#F5BF4F}
+.preview-dots span:nth-child(3){background:#5DC653}
+.preview-url{flex:1;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--bg-card);border:1px solid var(--border-light);border-radius:100px;padding:.45rem 1rem;font-family:var(--mono);font-size:.68rem;color:var(--ink-muted);max-width:480px;margin:0 auto}
+.preview-url .lock{font-size:.6rem;color:var(--sage)}
+.preview-actions{display:flex;gap:.4rem;align-items:center}
+.preview-open{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-muted);text-decoration:none;padding:.45rem .8rem;border-radius:100px;border:1px solid var(--border);transition:all .3s var(--ease)}
+.preview-open:hover{color:var(--accent);border-color:var(--accent)}
+.preview-close{width:32px;height:32px;border-radius:50%;background:transparent;border:1px solid var(--border);cursor:pointer;color:var(--ink-muted);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease)}
+.preview-close:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:rotate(90deg)}
+.preview-body{flex:1;position:relative;background:var(--bg-alt);overflow:hidden}
+.preview-frame{width:100%;height:100%;border:none;background:#fff;opacity:0;transition:opacity .5s var(--ease)}
+.preview-frame.loaded{opacity:1}
+.preview-loader{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;pointer-events:none;transition:opacity .4s var(--ease)}
+.preview-loader.hidden{opacity:0}
+.preview-spinner{width:38px;height:38px;border-radius:50%;border:2px solid var(--border);border-top-color:var(--accent);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.preview-loader-text{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--ink-muted)}
+.preview-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:3rem;text-align:center}
+.preview-fallback.show{display:flex}
+.preview-fallback-icon{width:72px;height:72px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--accent)}
+.preview-fallback h4{font-family:var(--serif);font-size:1.4rem;color:var(--ink);font-weight:500}
+.preview-fallback p{font-size:.9rem;color:var(--ink-muted);max-width:420px;line-height:1.6}
+@media(max-width:768px){
+  .preview-modal{padding:1rem}
+  .preview-dialog{max-height:100%;border-radius:12px}
+  .preview-url{font-size:.6rem;max-width:none}
+  .preview-open{display:none}
+}
 </style>
 </head>
 <body>
@@ -590,7 +634,10 @@ footer p{font-size:.73rem;color:var(--ink-muted)}
       <h3 class="projet-name">Supify</h3>
       <p class="projet-desc">Réseau social dédié à la musique : partage de morceaux, feed personnalisé, lecteur intégré avec waveform, likes, commentaires et découverte d'artistes. Une communauté de passionnés.</p>
       <div class="projet-stack"><span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>WebSocket</span><span>TailwindCSS</span></div>
-      <a href="https://supify.fr/" target="_blank" class="projet-link">Voir le projet →</a>
+      <div class="projet-actions">
+        <button class="preview-btn" data-preview-url="https://supify.fr/" data-preview-title="Supify"><span class="preview-dot"></span>Preview live</button>
+        <a href="https://supify.fr/" target="_blank" class="projet-link">Voir le projet →</a>
+      </div>
     </div>
   </div>
 
@@ -622,6 +669,9 @@ footer p{font-size:.73rem;color:var(--ink-muted)}
       <h3 class="projet-name">NutriScan</h3>
       <p class="projet-desc">Application de scan alimentaire qui analyse les valeurs nutritionnelles en temps réel. Score santé, suivi des macronutriments et historique de scans pour une alimentation éclairée.</p>
       <div class="projet-stack"><span>React Native</span><span>Node.js</span><span>MongoDB</span><span>API Vision</span></div>
+      <div class="projet-actions">
+        <button class="preview-btn" data-preview-title="NutriScan"><span class="preview-dot"></span>Preview</button>
+      </div>
     </div>
   </div>
 
@@ -667,9 +717,35 @@ footer p{font-size:.73rem;color:var(--ink-muted)}
       <h3 class="projet-name">Forge Coaching</h3>
       <p class="projet-desc">Plateforme SaaS de suivi coaching avec dashboard personnalisé, planification de séances, suivi des objectifs et messagerie intégrée entre coach et client.</p>
       <div class="projet-stack"><span>Vue.js</span><span>Firebase</span><span>TailwindCSS</span><span>Stripe</span><span>PWA</span></div>
+      <div class="projet-actions">
+        <button class="preview-btn" data-preview-title="Forge Coaching"><span class="preview-dot"></span>Preview</button>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- PREVIEW MODAL -->
+<div class="preview-modal" id="previewModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="preview-dialog">
+    <div class="preview-topbar">
+      <div class="preview-dots"><span></span><span></span><span></span></div>
+      <div class="preview-url"><span class="lock">●</span><span id="previewUrlText">—</span></div>
+      <div class="preview-actions">
+        <a id="previewOpen" class="preview-open" href="#" target="_blank" rel="noopener">Ouvrir ↗</a>
+        <button class="preview-close" id="previewClose" aria-label="Fermer la preview">×</button>
+      </div>
+    </div>
+    <div class="preview-body">
+      <iframe class="preview-frame" id="previewFrame" title="Aperçu du projet" loading="lazy" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+      <div class="preview-loader" id="previewLoader"><div class="preview-spinner"></div><div class="preview-loader-text">Chargement de l'aperçu…</div></div>
+      <div class="preview-fallback" id="previewFallback">
+        <div class="preview-fallback-icon">◎</div>
+        <h4>Preview bientôt disponible</h4>
+        <p>Ce projet n'est pas encore en ligne publiquement. Le déploiement est en cours — reviens très vite pour l'explorer en direct.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="process">
   <div class="process-inner">
@@ -725,4 +801,62 @@ const drawer=document.getElementById('navDrawer'),overlay=document.getElementByI
 const menuBtn=document.getElementById('menuBtn');
 function openDrawer(){drawer.classList.add('open');document.body.style.overflow='hidden'}
 function closeDrawer(){drawer.classList.remove('open');document.body.style.overflow=''}
-menuBtn
+if(menuBtn)menuBtn.addEventListener('click',openDrawer);
+if(closeBtn)closeBtn.addEventListener('click',closeDrawer);
+if(overlay)overlay.addEventListener('click',closeDrawer);
+
+// Project preview modal
+(function(){
+  const modal=document.getElementById('previewModal');
+  if(!modal)return;
+  const frame=document.getElementById('previewFrame');
+  const loader=document.getElementById('previewLoader');
+  const fallback=document.getElementById('previewFallback');
+  const urlText=document.getElementById('previewUrlText');
+  const openLink=document.getElementById('previewOpen');
+  const closeBtn=document.getElementById('previewClose');
+  let activeUrl=null;
+
+  function open(url,title){
+    activeUrl=url||null;
+    urlText.textContent=url?url.replace(/^https?:\/\//,'').replace(/\/$/,''):(title||'Preview indisponible');
+    frame.classList.remove('loaded');
+    loader.classList.remove('hidden');
+    if(url){
+      fallback.classList.remove('show');
+      frame.style.display='';
+      openLink.style.display='';
+      openLink.href=url;
+      frame.src=url;
+    }else{
+      frame.style.display='none';
+      openLink.style.display='none';
+      loader.classList.add('hidden');
+      fallback.classList.add('show');
+    }
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    setTimeout(()=>{frame.src='about:blank';fallback.classList.remove('show')},450);
+  }
+  frame.addEventListener('load',()=>{
+    if(frame.src&&frame.src!=='about:blank'){
+      frame.classList.add('loaded');
+      loader.classList.add('hidden');
+    }
+  });
+  document.querySelectorAll('.preview-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>open(btn.dataset.previewUrl||'',btn.dataset.previewTitle||''));
+  });
+  closeBtn.addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close()});
+})();
+</script>
+</body>
+</html>

@@ -1080,13 +1080,11 @@ body.scrolled .side-rail { opacity: 0.6; }
   text-transform: uppercase; letter-spacing: 0.08em; color: transparent;
 }
 .cursor-dot { width: 5px; height: 5px; background: var(--ink); margin-left: -2.5px; margin-top: -2.5px; mix-blend-mode: difference; }
-.cursor-ring.grow-sm { width: 54px; height: 54px; margin-left: -27px; margin-top: -27px; }
+.cursor-ring.grow-sm { width: 40px; height: 40px; margin-left: -20px; margin-top: -20px; }
 .cursor-ring.grow {
-  width: 84px; height: 84px; margin-left: -42px; margin-top: -42px;
-  background: var(--accent); border-color: var(--accent);
-  color: var(--accent-ink); mix-blend-mode: normal;
+  width: 40px; height: 40px; margin-left: -20px; margin-top: -20px;
+  border-color: var(--accent); mix-blend-mode: difference;
 }
-.cursor-ring.grow::before { content: attr(data-label); color: var(--accent-ink); }
 @media (hover: none), (pointer: coarse), (max-width: 900px) {
   .cursor-ring, .cursor-dot { display: none; }
 }
@@ -3887,7 +3885,7 @@ function updateGridColor() {
   onScroll();
 })();
 
-/* ═══ CURSOR LABELS — extend the existing cursor with data-cursor labels ═══ */
+/* ═══ CURSOR GROW — subtle ring expand on interactive elements ═══ */
 (function() {
   if (window.matchMedia('(hover: none), (pointer: coarse), (max-width: 900px)').matches) return;
   const ring = document.querySelector('.cursor-ring');
@@ -3895,8 +3893,7 @@ function updateGridColor() {
   const sel = '[data-cursor]';
   document.addEventListener('mouseover', e => {
     const t = e.target.closest(sel);
-    if (t && t.dataset.cursor) {
-      ring.setAttribute('data-label', t.dataset.cursor);
+    if (t) {
       ring.classList.add('grow');
       ring.classList.remove('grow-sm');
     }
@@ -3905,7 +3902,6 @@ function updateGridColor() {
     const t = e.target.closest(sel);
     if (t) {
       ring.classList.remove('grow');
-      ring.removeAttribute('data-label');
     }
   });
 })();

@@ -1325,26 +1325,16 @@ nav {
   padding: 1rem 1.55rem;
   font-family: var(--body); font-size: 0.85rem; font-weight: 500;
   border-radius: 999px;
-  transition: background 0.55s var(--ease-soft), color 0.55s var(--ease-soft),
-              border-color 0.55s var(--ease-soft), transform 0.55s var(--ease-soft),
-              box-shadow 0.55s var(--ease-soft);
+  transition: background 0.4s var(--ease-soft), color 0.4s var(--ease-soft),
+              border-color 0.4s var(--ease-soft), transform 0.4s var(--ease-soft),
+              box-shadow 0.4s var(--ease-soft);
   letter-spacing: -0.005em;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
 }
-.btn::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.55s var(--ease-soft);
-}
-.btn:hover::before { opacity: 0.35; }
 .btn-primary { background: var(--ink); color: var(--paper); }
-.btn-primary:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 32px oklch(62% 0.208 40 / 0.25); }
+.btn-primary:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-2px); box-shadow: 0 8px 24px oklch(62% 0.208 40 / 0.2); }
 .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border-strong); }
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: oklch(62% 0.208 40 / 0.06); transform: translateY(-2px); }
-.btn .arrow { display: inline-flex; transition: transform 0.55s var(--ease-soft); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.btn .arrow { display: inline-flex; transition: transform 0.4s var(--ease-soft); }
 .btn:hover .arrow { transform: translateX(4px); }
 
 .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.8rem, 2vw, 2rem); }
@@ -1604,18 +1594,7 @@ nav {
   will-change: transform;
 }
 .case-visual.releasing { transition: transform 0.9s var(--ease-soft), box-shadow 0.55s var(--ease-soft); }
-.case-visual::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  border-radius: inherit;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
-              oklch(100% 0 0 / 0.12), transparent 55%);
-  opacity: 0;
-  transition: opacity 0.6s var(--ease-soft);
-  z-index: 9;
-  mix-blend-mode: overlay;
-}
 .case-visual:hover { box-shadow: var(--shadow-lg); }
-.case-visual:hover::after { opacity: 1; }
 .case-visual > .schema {
   transform: translateZ(0);
   transition: transform 0.9s var(--ease-soft);
@@ -2439,7 +2418,7 @@ nav {
   font-weight: 400; letter-spacing: -0.015em;
   transition: all 0.4s var(--ease);
 }
-.contact-email:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 32px oklch(62% 0.208 40 / 0.25); }
+.contact-email:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-2px); box-shadow: 0 8px 24px oklch(62% 0.208 40 / 0.2); }
 .contact-email .arrow { transition: transform 0.4s var(--ease); }
 .contact-email:hover .arrow { transform: translateX(4px); }
 
@@ -3678,16 +3657,6 @@ function updateGridColor() {
   });
 })();
 
-/* ═══ BUTTON cursor tracking for shine ═══ */
-(function() {
-  document.querySelectorAll('.btn, .case-link, .contact-email').forEach(el => {
-    el.addEventListener('pointermove', (e) => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
-      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
-    });
-  });
-})();
 
 /* ═══ THEME WIPE overlay — spawned on toggle click ═══ */
 (function() {

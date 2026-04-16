@@ -1341,11 +1341,11 @@ nav {
 }
 .btn:hover::before { opacity: 0.35; }
 .btn-primary { background: var(--ink); color: var(--paper); }
-.btn-primary:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-3px); box-shadow: 0 18px 40px oklch(62% 0.208 40 / 0.35); }
+.btn-primary:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 32px oklch(62% 0.208 40 / 0.25); }
 .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border-strong); }
-.btn-ghost:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); transform: translateY(-3px); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: oklch(62% 0.208 40 / 0.06); transform: translateY(-2px); }
 .btn .arrow { display: inline-flex; transition: transform 0.55s var(--ease-soft); }
-.btn:hover .arrow { transform: translate(6px, -6px); }
+.btn:hover .arrow { transform: translateX(4px); }
 
 .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.8rem, 2vw, 2rem); }
 .hero-stat { border-top: 1px solid var(--border); padding-top: 0.7rem; font-family: var(--display); }
@@ -1561,7 +1561,7 @@ nav {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-.case-meta > div { padding: 0.35rem 0; }
+.case-meta > div { padding: 0.75rem 0.6rem; }
 .case-meta .k {
   font-family: var(--mono); font-size: 0.58rem; font-weight: 500;
   text-transform: uppercase; letter-spacing: 0.1em;
@@ -2439,9 +2439,9 @@ nav {
   font-weight: 400; letter-spacing: -0.015em;
   transition: all 0.4s var(--ease);
 }
-.contact-email:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-3px); }
+.contact-email:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 32px oklch(62% 0.208 40 / 0.25); }
 .contact-email .arrow { transition: transform 0.4s var(--ease); }
-.contact-email:hover .arrow { transform: translate(6px, -6px); }
+.contact-email:hover .arrow { transform: translateX(4px); }
 
 .contact-channels { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
 .contact-channel {

@@ -1177,6 +1177,23 @@ nav {
 .nav-links a:hover::before { opacity: 1; transform: scale(1); background: var(--accent); }
 
 .nav-right { display: flex; align-items: center; gap: 0.75rem; justify-self: end; }
+.lang-toggle {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--paper-alt);
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease);
+  line-height: 1;
+}
+.lang-toggle:hover { border-color: var(--accent); }
+.lang-toggle-sep { color: var(--ink-faint); pointer-events: none; user-select: none; }
+.lang-toggle-opt { transition: color 0.25s var(--ease); cursor: pointer; }
+.lang-toggle-opt.active { color: var(--ink); font-weight: 600; }
 .theme-toggle {
   width: 46px; height: 26px; border-radius: 999px;
   background: var(--paper-alt); border: 1px solid var(--border);
@@ -2810,7 +2827,7 @@ footer {
 <div class="section-ticker" id="sectionTicker" aria-hidden="true">
   <span class="section-ticker-num" id="tickerNum">01</span>
   <span class="section-ticker-sep">/</span>
-  <span class="section-ticker-label" id="tickerLabel">Ouverture</span>
+  <span class="section-ticker-label" id="tickerLabel" data-i18n="ticker.opening">Ouverture</span>
 </div>
 
 <!-- ═════════════ SIDE RAILS ═════════════ -->
@@ -2832,16 +2849,21 @@ footer {
     <span>Léon Becquet</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#studio">Studio</a></li>
-    <li><a href="#expertise">Expertise</a></li>
-    <li><a href="#travaux">Travaux</a></li>
-    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#studio" data-i18n="nav.studio">Studio</a></li>
+    <li><a href="#expertise" data-i18n="nav.expertise">Expertise</a></li>
+    <li><a href="#travaux" data-i18n="nav.work">Travaux</a></li>
+    <li><a href="#methode" data-i18n="nav.method">Méthode</a></li>
   </ul>
   <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+      <span class="lang-toggle-opt active" data-lang-opt="fr">FR</span>
+      <span class="lang-toggle-sep">|</span>
+      <span class="lang-toggle-opt" data-lang-opt="en">EN</span>
+    </button>
     <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
       <span class="theme-toggle-thumb" id="themeThumb">☀</span>
     </button>
-    <a href="#contact" class="nav-cta"><span class="cta-dot"></span>Prendre contact</a>
+    <a href="#contact" class="nav-cta"><span class="cta-dot"></span><span data-i18n="nav.contact">Prendre contact</span></a>
     <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
     </button>
@@ -2853,14 +2875,14 @@ footer {
   <div class="drawer-body">
     <button class="drawer-close" data-drawer-close aria-label="Fermer">✕</button>
     <ul class="drawer-links">
-      <li><a href="#studio" data-drawer-link>Studio<span class="n">01</span></a></li>
-      <li><a href="#expertise" data-drawer-link>Expertise<span class="n">02</span></a></li>
-      <li><a href="#travaux" data-drawer-link>Travaux<span class="n">03</span></a></li>
-      <li><a href="#methode" data-drawer-link>Méthode<span class="n">04</span></a></li>
-      <li><a href="#contact" data-drawer-link>Contact<span class="n">05</span></a></li>
+      <li><a href="#studio" data-drawer-link data-i18n="drawer.studio">Studio<span class="n">01</span></a></li>
+      <li><a href="#expertise" data-drawer-link data-i18n="drawer.expertise">Expertise<span class="n">02</span></a></li>
+      <li><a href="#travaux" data-drawer-link data-i18n="drawer.work">Travaux<span class="n">03</span></a></li>
+      <li><a href="#methode" data-drawer-link data-i18n="drawer.method">Méthode<span class="n">04</span></a></li>
+      <li><a href="#contact" data-drawer-link data-i18n="drawer.contact">Contact<span class="n">05</span></a></li>
     </ul>
     <div class="drawer-foot">
-      <a href="#contact" class="drawer-cta" data-drawer-link>Prendre contact <span>↗</span></a>
+      <a href="#contact" class="drawer-cta" data-drawer-link data-i18n="drawer.cta">Prendre contact <span>↗</span></a>
     </div>
   </div>
 </div>
@@ -2872,20 +2894,20 @@ footer {
 
   <div class="hero-meta" data-reveal>
     <div>
-      <span class="k">Portfolio · 2026</span>
-      <span class="v">Studio d'une personne<br>basé en France</span>
+      <span class="k" data-i18n="hero.meta.portfolio">Portfolio · 2026</span>
+      <span class="v" data-i18n="hero.meta.studio">Studio d'une personne<br>basé en France</span>
     </div>
     <div class="hero-meta-center">
-      <span class="k">Édition</span>
-      <span class="v">Nº 04 — Printemps 2026</span>
+      <span class="k" data-i18n="hero.meta.edition.label">Édition</span>
+      <span class="v" data-i18n="hero.meta.edition.value">Nº 04 — Printemps 2026</span>
     </div>
     <div class="hero-meta-right">
-      <span class="k">Statut</span>
-      <span class="v">Disponible — fenêtre<br>de mai à juillet</span>
+      <span class="k" data-i18n="hero.meta.status.label">Statut</span>
+      <span class="v" data-i18n="hero.meta.status.value">Disponible — fenêtre<br>de mai à juillet</span>
     </div>
   </div>
 
-  <h1 class="hero-title">
+  <h1 class="hero-title" data-i18n="hero.title">
     <span class="row row-1"><span class="mask d1"><span class="mask-inner">Je construis</span></span></span>
     <span class="row row-2"><span class="mask d2"><span class="mask-inner">des sites qui</span></span></span>
     <span class="row row-3"><span class="mask d3"><span class="mask-inner"><span class="serif-em">marquent.</span></span></span></span>
@@ -2893,26 +2915,26 @@ footer {
 
   <div class="hero-foot">
     <div data-reveal data-reveal-delay="3">
-      <p class="hero-lead">
+      <p class="hero-lead" data-i18n="hero.lead">
         <strong>Léon Becquet</strong> — développeur fullstack en solo. Je conçois et je code des sites, applications et outils web sur mesure, pensés au pixel près et livrés clé en main. Du premier wireframe à la mise en ligne — un seul interlocuteur, une ligne directrice.
       </p>
       <div class="hero-actions">
-        <a href="#travaux" class="btn btn-primary" data-magnetic data-cursor="Descendre">Voir les travaux <span class="arrow">↗</span></a>
-        <a href="#contact" class="btn btn-ghost" data-magnetic data-cursor="Écrire">Écrivez-moi</a>
+        <a href="#travaux" class="btn btn-primary" data-magnetic data-cursor="Descendre" data-i18n="hero.cta.work">Voir les travaux <span class="arrow">↗</span></a>
+        <a href="#contact" class="btn btn-ghost" data-magnetic data-cursor="Écrire" data-i18n="hero.cta.contact">Écrivez-moi</a>
       </div>
     </div>
     <div class="hero-stats" data-reveal data-reveal-delay="4">
       <div class="hero-stat">
         <span class="num"><span data-count="4">0</span><span class="plus">+</span></span>
-        <span class="lbl">Années<br>de pratique</span>
+        <span class="lbl" data-i18n="hero.stat.years">Années<br>de pratique</span>
       </div>
       <div class="hero-stat">
         <span class="num"><span data-count="40">0</span><span class="plus">+</span></span>
-        <span class="lbl">Projets<br>livrés</span>
+        <span class="lbl" data-i18n="hero.stat.projects">Projets<br>livrés</span>
       </div>
       <div class="hero-stat">
         <span class="num"><span data-count="100">0</span>%</span>
-        <span class="lbl">Sur<br>mesure</span>
+        <span class="lbl" data-i18n="hero.stat.custom">Sur<br>mesure</span>
       </div>
     </div>
   </div>
@@ -2939,44 +2961,44 @@ footer {
 </div>
 
 <!-- ═════════════════════ STUDIO ═════════════════════ -->
-<section class="section manifesto" id="studio" data-flash="Studio">
-  <span class="section-flash" aria-hidden="true">Studio — 01</span>
+<section class="section manifesto" id="studio" data-flash="Studio" data-flash-en="Studio">
+  <span class="section-flash" aria-hidden="true" data-i18n="flash.studio">Studio — 01</span>
   <div class="section-inner">
     <div class="sh" data-reveal>
-      <span class="sh-tag">(01) Studio</span>
-      <h2 class="sh-title">Un studio<br>d'<span class="em">une personne</span>,<br>pensé comme dix.</h2>
+      <span class="sh-tag" data-i18n="tag.studio">(01) Studio</span>
+      <h2 class="sh-title" data-i18n="studio.title">Un studio<br>d'<span class="em">une personne</span>,<br>pensé comme dix.</h2>
     </div>
     <div class="manifesto-grid">
-      <p class="manifesto-lead" data-reveal data-reveal-delay="1">
+      <p class="manifesto-lead" data-reveal data-reveal-delay="1" data-i18n="studio.lead">
         Je crois qu'un site n'est pas un livrable&nbsp;: c'est un <span class="em">objet vivant</span> qui porte la voix d'une marque. Mon rôle est de lui donner forme, structure — et cette petite chose en plus qui fait qu'on s'en souvient.
       </p>
-      <div class="manifesto-body" data-reveal data-reveal-delay="2">
+      <div class="manifesto-body" data-reveal data-reveal-delay="2" data-i18n="studio.body">
         <p>Depuis <strong>plus de quatre ans</strong>, j'accompagne des startups, des agences et des marques dans la création de leurs outils numériques. J'interviens sur l'ensemble du cycle — conception, design, développement, mise en ligne — parce que c'est en maîtrisant toute la chaîne qu'on évite les ruptures.</p>
         <p>Je travaille <strong>seul, en direct avec mes clients</strong>. Pas d'intermédiaire, pas de couches hiérarchiques, pas de factures cachées. Un brief, un échange, une livraison. La promesse de la petite structure sans la fragilité.</p>
         <div class="manifesto-signature">
           <div class="signature-avatar">LB</div>
           <div>
             <div class="signature-name">Léon Becquet</div>
-            <div class="signature-role">Développeur &amp; designer</div>
+            <div class="signature-role" data-i18n="studio.role">Développeur &amp; designer</div>
           </div>
         </div>
       </div>
       <div class="manifesto-pull" data-reveal data-reveal-delay="3">
         <div class="pull-item">
-          <span class="k">Basé</span>
-          <span class="v">France —<br>disponible partout</span>
+          <span class="k" data-i18n="studio.pull.based.label">Basé</span>
+          <span class="v" data-i18n="studio.pull.based.value">France —<br>disponible partout</span>
         </div>
         <div class="pull-item">
-          <span class="k">Spécialités</span>
-          <span class="v">Front, back,<br>design produit</span>
+          <span class="k" data-i18n="studio.pull.specialties.label">Spécialités</span>
+          <span class="v" data-i18n="studio.pull.specialties.value">Front, back,<br>design produit</span>
         </div>
         <div class="pull-item">
-          <span class="k">Clients</span>
-          <span class="v">Startups, agences,<br>marques indépendantes</span>
+          <span class="k" data-i18n="studio.pull.clients.label">Clients</span>
+          <span class="v" data-i18n="studio.pull.clients.value">Startups, agences,<br>marques indépendantes</span>
         </div>
         <div class="pull-item">
-          <span class="k">Approche</span>
-          <span class="v">Direct, itératif,<br>sur mesure</span>
+          <span class="k" data-i18n="studio.pull.approach.label">Approche</span>
+          <span class="v" data-i18n="studio.pull.approach.value">Direct, itératif,<br>sur mesure</span>
         </div>
       </div>
     </div>
@@ -2984,36 +3006,36 @@ footer {
 </section>
 
 <!-- ═════════════════════ EXPERTISE ═════════════════════ -->
-<section class="section expertise" id="expertise" data-flash="Expertise">
-  <span class="section-flash" aria-hidden="true">Expertise — 02</span>
+<section class="section expertise" id="expertise" data-flash="Expertise" data-flash-en="Expertise">
+  <span class="section-flash" aria-hidden="true" data-i18n="flash.expertise">Expertise — 02</span>
   <div class="section-inner">
     <div class="sh" data-reveal>
-      <span class="sh-tag">(02) Expertise</span>
-      <h2 class="sh-title">Les disciplines<br>du <span class="em">studio</span></h2>
+      <span class="sh-tag" data-i18n="tag.expertise">(02) Expertise</span>
+      <h2 class="sh-title" data-i18n="expertise.title">Les disciplines<br>du <span class="em">studio</span></h2>
     </div>
     <div class="expertise-list">
       <div class="exp-row" data-reveal>
         <div class="exp-num">01 / 04</div>
-        <div class="exp-title">Sites &amp; interfaces web</div>
-        <div class="exp-desc">Sites vitrines, landing pages, dashboards applicatifs. Du composant atomique au design system complet — <span class="em">fluide, accessible, tenu au millimètre.</span></div>
+        <div class="exp-title" data-i18n="expertise.1.title">Sites &amp; interfaces web</div>
+        <div class="exp-desc" data-i18n="expertise.1.desc">Sites vitrines, landing pages, dashboards applicatifs. Du composant atomique au design system complet — <span class="em">fluide, accessible, tenu au millimètre.</span></div>
         <div class="exp-tools"><span>React</span><span>Next.js</span><span>Vue</span><span>Tailwind</span></div>
       </div>
       <div class="exp-row" data-reveal data-reveal-delay="1">
         <div class="exp-num">02 / 04</div>
-        <div class="exp-title">API &amp; architecture back</div>
-        <div class="exp-desc">Bases de données, authentification, paiements, intégrations tierces. <span class="em">L'invisible qui fait tenir l'ensemble</span> — scalable, documenté, à l'épreuve des pics.</div>
+        <div class="exp-title" data-i18n="expertise.2.title">API &amp; architecture back</div>
+        <div class="exp-desc" data-i18n="expertise.2.desc">Bases de données, authentification, paiements, intégrations tierces. <span class="em">L'invisible qui fait tenir l'ensemble</span> — scalable, documenté, à l'épreuve des pics.</div>
         <div class="exp-tools"><span>Node</span><span>Postgres</span><span>GraphQL</span><span>Stripe</span></div>
       </div>
       <div class="exp-row" data-reveal data-reveal-delay="2">
         <div class="exp-num">03 / 04</div>
-        <div class="exp-title">Design produit &amp; UI</div>
-        <div class="exp-desc">Wireframes, prototypes interactifs, systèmes de composants. Avant d'écrire la moindre ligne, je dessine le parcours dans Figma <span class="em">jusqu'à ce qu'il sonne juste.</span></div>
+        <div class="exp-title" data-i18n="expertise.3.title">Design produit &amp; UI</div>
+        <div class="exp-desc" data-i18n="expertise.3.desc">Wireframes, prototypes interactifs, systèmes de composants. Avant d'écrire la moindre ligne, je dessine le parcours dans Figma <span class="em">jusqu'à ce qu'il sonne juste.</span></div>
         <div class="exp-tools"><span>Figma</span><span>Framer</span><span>Prototypes</span></div>
       </div>
       <div class="exp-row" data-reveal data-reveal-delay="3">
         <div class="exp-num">04 / 04</div>
-        <div class="exp-title">Mise en ligne &amp; performances</div>
-        <div class="exp-desc">Déploiement continu, optimisation du chargement, monitoring, SEO technique. <span class="em">L'exigence ne s'arrête pas à la dernière ligne de code</span> — elle commence à la mise en ligne.</div>
+        <div class="exp-title" data-i18n="expertise.4.title">Mise en ligne &amp; performances</div>
+        <div class="exp-desc" data-i18n="expertise.4.desc">Déploiement continu, optimisation du chargement, monitoring, SEO technique. <span class="em">L'exigence ne s'arrête pas à la dernière ligne de code</span> — elle commence à la mise en ligne.</div>
         <div class="exp-tools"><span>Vercel</span><span>Docker</span><span>CI/CD</span><span>SEO</span></div>
       </div>
     </div>
@@ -3021,12 +3043,12 @@ footer {
 </section>
 
 <!-- ═════════════════════ TRAVAUX / CASES ═════════════════════ -->
-<section class="section cases" id="travaux" data-flash="Travaux">
-  <span class="section-flash" aria-hidden="true">Travaux — 03</span>
+<section class="section cases" id="travaux" data-flash="Travaux" data-flash-en="Work">
+  <span class="section-flash" aria-hidden="true" data-i18n="flash.work">Travaux — 03</span>
   <div class="section-inner">
     <div class="sh" data-reveal>
-      <span class="sh-tag">(03) Travaux</span>
-      <h2 class="sh-title">Études de cas<br><span class="em">sélectionnées</span></h2>
+      <span class="sh-tag" data-i18n="tag.work">(03) Travaux</span>
+      <h2 class="sh-title" data-i18n="work.title">Études de cas<br><span class="em">sélectionnées</span></h2>
     </div>
 
     <!-- ══ CASE 001 : SUPIFY ══ -->
@@ -3044,7 +3066,7 @@ footer {
 
           <div class="sup-bar">
             <div class="sup-brand"><span class="sup-logo"></span>Supify</div>
-            <div class="sup-online"><span class="sup-dot"></span><strong>2 418</strong>en ligne</div>
+            <div class="sup-online" data-i18n="schema.sup.online"><span class="sup-dot"></span><strong>2 418</strong>en ligne</div>
           </div>
 
           <div class="sup-now">
@@ -3053,22 +3075,22 @@ footer {
               <div class="sup-art-ring"></div>
             </div>
             <div class="sup-info">
-              <div class="sup-label">En lecture — Nova Eclipse</div>
+              <div class="sup-label" data-i18n="schema.sup.playing">En lecture — Nova Eclipse</div>
               <div class="sup-track">Midnight Dreams</div>
-              <div class="sup-artist">Nova Eclipse · Échos nocturnes</div>
+              <div class="sup-artist" data-i18n="schema.sup.artist">Nova Eclipse · Échos nocturnes</div>
               <div class="sup-progress">
                 <div class="sup-progress-bar"><div class="sup-progress-fill"></div></div>
                 <div class="sup-time"><span>1:24</span><span>3:42</span></div>
               </div>
               <div class="sup-actions">
                 <span class="sup-action liked">12k</span>
-                <span class="sup-action chat">428 commentaires</span>
+                <span class="sup-action chat" data-i18n="schema.sup.comments">428 commentaires</span>
               </div>
             </div>
           </div>
 
           <div class="sup-feed">
-            <div class="sup-feed-title">Amis — en écoute</div>
+            <div class="sup-feed-title" data-i18n="schema.sup.friends">Amis — en écoute</div>
             <div class="sup-feed-rows">
               <div class="sup-feed-row">
                 <div class="sup-feed-avatar a1">SD</div>
@@ -3099,22 +3121,22 @@ footer {
         </div>
       </div>
       <div class="case-body">
-        <div class="case-number">Nº 001 / Réseau social</div>
+        <div class="case-number" data-i18n="case.supify.number">Nº 001 / Réseau social</div>
         <h3 class="case-name">Supify</h3>
-        <p class="case-tagline">Le réseau social des passionnés de musique.</p>
-        <p class="case-desc">
+        <p class="case-tagline" data-i18n="case.supify.tagline">Le réseau social des passionnés de musique.</p>
+        <p class="case-desc" data-i18n="case.supify.desc">
           Feed personnalisé, lecteur intégré avec waveform, partage de morceaux, découverte d'artistes. Une communauté vivante autour du son — pensée pour la découverte, construite pour durer.
         </p>
         <div class="case-meta">
-          <div><span class="k">Rôle</span><span class="v">Conception &amp; dev fullstack</span></div>
-          <div><span class="k">Année</span><span class="v">2024 — 2025</span></div>
-          <div><span class="k">Statut</span><span class="v">En production</span></div>
-          <div><span class="k">Équipe</span><span class="v">Solo</span></div>
+          <div><span class="k" data-i18n="case.label.role">Rôle</span><span class="v" data-i18n="case.supify.role">Conception &amp; dev fullstack</span></div>
+          <div><span class="k" data-i18n="case.label.year">Année</span><span class="v">2024 — 2025</span></div>
+          <div><span class="k" data-i18n="case.label.status">Statut</span><span class="v" data-i18n="case.supify.status">En production</span></div>
+          <div><span class="k" data-i18n="case.label.team">Équipe</span><span class="v">Solo</span></div>
         </div>
         <div class="case-stack">
           <span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>WebSocket</span><span>Tailwind</span>
         </div>
-        <a href="https://supify.fr/" target="_blank" rel="noopener" class="case-link" data-magnetic data-cursor="Visiter">
+        <a href="https://supify.fr/" target="_blank" rel="noopener" class="case-link" data-magnetic data-cursor="Visiter" data-i18n="case.supify.link">
           Voir le projet <span class="arrow">↗</span>
         </a>
       </div>
@@ -3134,12 +3156,12 @@ footer {
 
           <div class="zf-bar">
             <div class="zf-brand"><span class="zf-logo">Z</span>ZETFAR</div>
-            <div class="zf-cart">Panier · 3</div>
+            <div class="zf-cart" data-i18n="schema.zf.cart">Panier · 3</div>
           </div>
 
           <div class="zf-hero">
             <div class="zf-hero-title">ZETFAR</div>
-            <div class="zf-hero-sub">Collection officielle</div>
+            <div class="zf-hero-sub" data-i18n="schema.zf.collection">Collection officielle</div>
           </div>
 
           <div class="zf-products">
@@ -3147,39 +3169,39 @@ footer {
               <div class="zf-product-img hoodie"></div>
               <div class="zf-product-name">Hoodie Classic</div>
               <div class="zf-product-price">39,90€</div>
-              <span class="zf-badge sold">Best-seller</span>
+              <span class="zf-badge sold" data-i18n="schema.zf.bestseller">Best-seller</span>
             </div>
             <div class="zf-product">
               <div class="zf-product-img cap"></div>
-              <div class="zf-product-name">Casquette Z</div>
+              <div class="zf-product-name" data-i18n="schema.zf.cap">Casquette Z</div>
               <div class="zf-product-price">24,90€</div>
-              <span class="zf-badge new">Nouveau</span>
+              <span class="zf-badge new" data-i18n="schema.zf.new">Nouveau</span>
             </div>
             <div class="zf-product">
               <div class="zf-product-img tee"></div>
-              <div class="zf-product-name">Tee-shirt Logo</div>
+              <div class="zf-product-name" data-i18n="schema.zf.tee">Tee-shirt Logo</div>
               <div class="zf-product-price">29,90€</div>
             </div>
           </div>
         </div>
       </div>
       <div class="case-body">
-        <div class="case-number">Nº 002 / E-commerce Shopify</div>
+        <div class="case-number" data-i18n="case.zetfar.number">Nº 002 / E-commerce Shopify</div>
         <h3 class="case-name">Zetfar</h3>
-        <p class="case-tagline">La boutique officielle d'un créateur à 2M d'abonnés.</p>
-        <p class="case-desc">
+        <p class="case-tagline" data-i18n="case.zetfar.tagline">La boutique officielle d'un créateur à 2M d'abonnés.</p>
+        <p class="case-desc" data-i18n="case.zetfar.desc">
           Boutique Shopify sur mesure pour Zetfar, youtubeur gaming à 2 millions d'abonnés. Design custom aligné avec l'univers de la chaîne, gestion du catalogue, optimisation conversion, infrastructure prête pour les pics de trafic post-vidéo.
         </p>
         <div class="case-meta">
-          <div><span class="k">Rôle</span><span class="v">Conception &amp; dev Shopify</span></div>
-          <div><span class="k">Année</span><span class="v">2024 — 2025</span></div>
-          <div><span class="k">Statut</span><span class="v">En production</span></div>
-          <div><span class="k">Équipe</span><span class="v">Solo</span></div>
+          <div><span class="k" data-i18n="case.label.role">Rôle</span><span class="v" data-i18n="case.zetfar.role">Conception &amp; dev Shopify</span></div>
+          <div><span class="k" data-i18n="case.label.year">Année</span><span class="v">2024 — 2025</span></div>
+          <div><span class="k" data-i18n="case.label.status">Statut</span><span class="v" data-i18n="case.zetfar.status">En production</span></div>
+          <div><span class="k" data-i18n="case.label.team">Équipe</span><span class="v">Solo</span></div>
         </div>
         <div class="case-stack">
           <span>Shopify</span><span>Liquid</span><span>JavaScript</span><span>CSS</span><span>Figma</span>
         </div>
-        <a href="https://zetfar.com/" target="_blank" rel="noopener" class="case-link" data-magnetic data-cursor="Visiter">
+        <a href="https://zetfar.com/" target="_blank" rel="noopener" class="case-link" data-magnetic data-cursor="Visiter" data-i18n="case.zetfar.link">
           Voir le projet <span class="arrow">↗</span>
         </a>
       </div>
@@ -3208,11 +3230,11 @@ footer {
               <div class="nut-leaf"></div>
             </div>
             <div class="nut-details">
-              <div class="nut-category">Fruit · Épicerie bio</div>
-              <div class="nut-name">Pomme Pink Lady</div>
+              <div class="nut-category" data-i18n="schema.nut.category">Fruit · Épicerie bio</div>
+              <div class="nut-name" data-i18n="schema.nut.product">Pomme Pink Lady</div>
               <div class="nut-meta">
-                <span class="nut-tag ok">Bio</span>
-                <span class="nut-tag ok">Sans pesticide</span>
+                <span class="nut-tag ok" data-i18n="schema.nut.organic">Bio</span>
+                <span class="nut-tag ok" data-i18n="schema.nut.pesticide">Sans pesticide</span>
                 <span class="nut-tag neutral">130 kcal</span>
               </div>
             </div>
@@ -3224,17 +3246,17 @@ footer {
 
           <div class="nut-macros">
             <div class="nut-macro">
-              <div class="nut-macro-label">Glucides</div>
+              <div class="nut-macro-label" data-i18n="schema.nut.carbs">Glucides</div>
               <div class="nut-macro-bar"><div class="nut-macro-fill g" style="width:62%"></div></div>
               <div class="nut-macro-val">25g</div>
             </div>
             <div class="nut-macro">
-              <div class="nut-macro-label">Fibres</div>
+              <div class="nut-macro-label" data-i18n="schema.nut.fiber">Fibres</div>
               <div class="nut-macro-bar"><div class="nut-macro-fill p" style="width:38%"></div></div>
               <div class="nut-macro-val">4.4g</div>
             </div>
             <div class="nut-macro">
-              <div class="nut-macro-label">Lipides</div>
+              <div class="nut-macro-label" data-i18n="schema.nut.fats">Lipides</div>
               <div class="nut-macro-bar"><div class="nut-macro-fill l" style="width:12%"></div></div>
               <div class="nut-macro-val">0.2g</div>
             </div>
@@ -3242,17 +3264,17 @@ footer {
         </div>
       </div>
       <div class="case-body">
-        <div class="case-number">Nº 003 / Application mobile</div>
+        <div class="case-number" data-i18n="case.nutri.number">Nº 003 / Application mobile</div>
         <h3 class="case-name">NutriScan</h3>
-        <p class="case-tagline">Scanner avant de manger.</p>
-        <p class="case-desc">
+        <p class="case-tagline" data-i18n="case.nutri.tagline">Scanner avant de manger.</p>
+        <p class="case-desc" data-i18n="case.nutri.desc">
           Analyse instantanée des valeurs nutritionnelles à partir d'une photo du produit. Score santé, suivi des macronutriments, historique des scans — pour une alimentation éclairée sans prise de tête.
         </p>
         <div class="case-meta">
-          <div><span class="k">Rôle</span><span class="v">Dev mobile &amp; backend</span></div>
-          <div><span class="k">Année</span><span class="v">2024</span></div>
-          <div><span class="k">Statut</span><span class="v">MVP livré</span></div>
-          <div><span class="k">Équipe</span><span class="v">Solo</span></div>
+          <div><span class="k" data-i18n="case.label.role">Rôle</span><span class="v" data-i18n="case.nutri.role">Dev mobile &amp; backend</span></div>
+          <div><span class="k" data-i18n="case.label.year">Année</span><span class="v">2024</span></div>
+          <div><span class="k" data-i18n="case.label.status">Statut</span><span class="v" data-i18n="case.nutri.status">MVP livré</span></div>
+          <div><span class="k" data-i18n="case.label.team">Équipe</span><span class="v">Solo</span></div>
         </div>
         <div class="case-stack">
           <span>React Native</span><span>Node.js</span><span>MongoDB</span><span>Vision API</span>
@@ -3282,17 +3304,17 @@ footer {
 
           <div class="frg-kpis">
             <div class="frg-kpi">
-              <div class="frg-kpi-label">Clients actifs</div>
+              <div class="frg-kpi-label" data-i18n="schema.frg.active">Clients actifs</div>
               <div class="frg-kpi-value">24</div>
-              <div class="frg-kpi-trend up">+3 ce mois</div>
+              <div class="frg-kpi-trend up" data-i18n="schema.frg.active.trend">+3 ce mois</div>
             </div>
             <div class="frg-kpi">
-              <div class="frg-kpi-label">Objectifs</div>
+              <div class="frg-kpi-label" data-i18n="schema.frg.goals">Objectifs</div>
               <div class="frg-kpi-value">89<sup>%</sup></div>
               <div class="frg-kpi-trend up">+5 pts</div>
             </div>
             <div class="frg-kpi">
-              <div class="frg-kpi-label">Séances</div>
+              <div class="frg-kpi-label" data-i18n="schema.frg.sessions">Séances</div>
               <div class="frg-kpi-value">156</div>
               <div class="frg-kpi-trend up">+12</div>
             </div>
@@ -3300,7 +3322,7 @@ footer {
 
           <div class="frg-chart">
             <div class="frg-chart-head">
-              <div class="frg-chart-label">Progression mensuelle</div>
+              <div class="frg-chart-label" data-i18n="schema.frg.progress">Progression mensuelle</div>
               <div class="frg-chart-total">+24%</div>
             </div>
             <svg viewBox="0 0 100 40" preserveAspectRatio="none">
@@ -3312,26 +3334,26 @@ footer {
 
           <div class="frg-schedule">
             <div class="frg-schedule-head">
-              <div class="frg-label">Aujourd'hui</div>
-              <div class="frg-date">Jeu. 16 avril</div>
+              <div class="frg-label" data-i18n="schema.frg.today">Aujourd'hui</div>
+              <div class="frg-date" data-i18n="schema.frg.date">Jeu. 16 avril</div>
             </div>
             <div class="frg-slots">
               <div class="frg-slot done">
                 <div class="frg-slot-time">09:00</div>
-                <div class="frg-slot-name">Sophie D. — Bilan mensuel</div>
-                <div class="frg-slot-type">Visio</div>
+                <div class="frg-slot-name" data-i18n="schema.frg.slot1.name">Sophie D. — Bilan mensuel</div>
+                <div class="frg-slot-type" data-i18n="schema.frg.slot1.type">Visio</div>
                 <div class="frg-slot-avatar a1">SD</div>
               </div>
               <div class="frg-slot active">
                 <div class="frg-slot-time">11:30</div>
-                <div class="frg-slot-name">Marc R. — Suivi objectifs</div>
-                <div class="frg-slot-type">En salle</div>
+                <div class="frg-slot-name" data-i18n="schema.frg.slot2.name">Marc R. — Suivi objectifs</div>
+                <div class="frg-slot-type" data-i18n="schema.frg.slot2.type">En salle</div>
                 <div class="frg-slot-avatar a2">MR</div>
               </div>
               <div class="frg-slot">
                 <div class="frg-slot-time">16:00</div>
-                <div class="frg-slot-name">Émilie V. — Renforcement</div>
-                <div class="frg-slot-type">En salle</div>
+                <div class="frg-slot-name" data-i18n="schema.frg.slot3.name">Émilie V. — Renforcement</div>
+                <div class="frg-slot-type" data-i18n="schema.frg.slot3.type">En salle</div>
                 <div class="frg-slot-avatar a3">EV</div>
               </div>
             </div>
@@ -3339,17 +3361,17 @@ footer {
         </div>
       </div>
       <div class="case-body">
-        <div class="case-number">Nº 004 / Plateforme SaaS</div>
+        <div class="case-number" data-i18n="case.forge.number">Nº 004 / Plateforme SaaS</div>
         <h3 class="case-name">Forge Coaching</h3>
-        <p class="case-tagline">L'outil quotidien des coachs sportifs.</p>
-        <p class="case-desc">
+        <p class="case-tagline" data-i18n="case.forge.tagline">L'outil quotidien des coachs sportifs.</p>
+        <p class="case-desc" data-i18n="case.forge.desc">
           Dashboard personnalisé, planification des séances, suivi des objectifs, messagerie intégrée entre coach et client. Un outil métier pensé pour remplacer le tableur éternel qu'on se trimballe depuis trop longtemps.
         </p>
         <div class="case-meta">
-          <div><span class="k">Rôle</span><span class="v">Conception &amp; dev fullstack</span></div>
-          <div><span class="k">Année</span><span class="v">2023 — 2024</span></div>
-          <div><span class="k">Statut</span><span class="v">En production</span></div>
-          <div><span class="k">Équipe</span><span class="v">Solo</span></div>
+          <div><span class="k" data-i18n="case.label.role">Rôle</span><span class="v" data-i18n="case.forge.role">Conception &amp; dev fullstack</span></div>
+          <div><span class="k" data-i18n="case.label.year">Année</span><span class="v">2023 — 2024</span></div>
+          <div><span class="k" data-i18n="case.label.status">Statut</span><span class="v" data-i18n="case.forge.status">En production</span></div>
+          <div><span class="k" data-i18n="case.label.team">Équipe</span><span class="v">Solo</span></div>
         </div>
         <div class="case-stack">
           <span>Vue.js</span><span>Firebase</span><span>Tailwind</span><span>Stripe</span><span>PWA</span>
@@ -3362,25 +3384,25 @@ footer {
 <!-- ═════════════ KINETIC DIVIDER — avant la méthode ═════════════ -->
 <div class="kinetic dark" aria-hidden="true">
   <div class="kinetic-track">
-    <span class="kinetic-item">Pensé <span class="em">au pixel</span> près <span class="kinetic-star">✦</span></span>
-    <span class="kinetic-item">Livré <span class="em">clé en main</span> <span class="kinetic-star">✦</span></span>
-    <span class="kinetic-item">Un seul <span class="em">interlocuteur</span> <span class="kinetic-star">✦</span></span>
-    <span class="kinetic-item">De l'<span class="em">idée</span> au code <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.1">Pensé <span class="em">au pixel</span> près <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.2">Livré <span class="em">clé en main</span> <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.3">Un seul <span class="em">interlocuteur</span> <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.4">De l'<span class="em">idée</span> au code <span class="kinetic-star">✦</span></span>
     <!-- dup for seamless loop -->
-    <span class="kinetic-item">Pensé <span class="em">au pixel</span> près <span class="kinetic-star">✦</span></span>
-    <span class="kinetic-item">Livré <span class="em">clé en main</span> <span class="kinetic-star">✦</span></span>
-    <span class="kinetic-item">Un seul <span class="em">interlocuteur</span> <span class="kinetic-star">✦</span></span>
-    <span class="kinetic-item">De l'<span class="em">idée</span> au code <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.1">Pensé <span class="em">au pixel</span> près <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.2">Livré <span class="em">clé en main</span> <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.3">Un seul <span class="em">interlocuteur</span> <span class="kinetic-star">✦</span></span>
+    <span class="kinetic-item" data-i18n="kinetic.4">De l'<span class="em">idée</span> au code <span class="kinetic-star">✦</span></span>
   </div>
 </div>
 
 <!-- ═════════════════════ METHODE ═════════════════════ -->
-<section class="section method" id="methode" data-flash="Méthode">
-  <span class="section-flash" aria-hidden="true">Méthode — 04</span>
+<section class="section method" id="methode" data-flash="Méthode" data-flash-en="Method">
+  <span class="section-flash" aria-hidden="true" data-i18n="flash.method">Méthode — 04</span>
   <div class="section-inner">
     <div class="sh" data-reveal>
-      <span class="sh-tag">(04) Méthode</span>
-      <h2 class="sh-title">Comment<br>je <span class="em">travaille</span></h2>
+      <span class="sh-tag" data-i18n="tag.method">(04) Méthode</span>
+      <h2 class="sh-title" data-i18n="method.title">Comment<br>je <span class="em">travaille</span></h2>
     </div>
     <div class="method-list">
       <div class="method-step" data-reveal>
@@ -3389,10 +3411,10 @@ footer {
           <span class="mn-text">00</span>
         </div>
         <div>
-          <h3>Premier contact</h3>
-          <div class="sub">30 min · visio ou café</div>
+          <h3 data-i18n="method.0.title">Premier contact</h3>
+          <div class="sub" data-i18n="method.0.sub">30 min · visio ou café</div>
         </div>
-        <p>On parle de votre projet, vos objectifs, vos délais. En 30 minutes, vous repartez avec une vision claire de ce que je peux construire pour vous — et comment on s'y prend.</p>
+        <p data-i18n="method.0.desc">On parle de votre projet, vos objectifs, vos délais. En 30 minutes, vous repartez avec une vision claire de ce que je peux construire pour vous — et comment on s'y prend.</p>
       </div>
       <div class="method-step" data-reveal data-reveal-delay="1">
         <div class="method-num">
@@ -3400,10 +3422,10 @@ footer {
           <span class="mn-text">01</span>
         </div>
         <div>
-          <h3>Exploration &amp; cadrage</h3>
-          <div class="sub">1 à 2 semaines</div>
+          <h3 data-i18n="method.1.title">Exploration &amp; cadrage</h3>
+          <div class="sub" data-i18n="method.1.sub">1 à 2 semaines</div>
         </div>
-        <p>Plongée dans votre univers. Benchmark, architecture d'information, premiers wireframes. On fixe ensemble la direction <span class="em">avant</span> de commencer à construire.</p>
+        <p data-i18n="method.1.desc">Plongée dans votre univers. Benchmark, architecture d'information, premiers wireframes. On fixe ensemble la direction <span class="em">avant</span> de commencer à construire.</p>
       </div>
       <div class="method-step" data-reveal data-reveal-delay="2">
         <div class="method-num">
@@ -3411,10 +3433,10 @@ footer {
           <span class="mn-text">02</span>
         </div>
         <div>
-          <h3>Design &amp; itérations</h3>
-          <div class="sub">2 à 4 semaines</div>
+          <h3 data-i18n="method.2.title">Design &amp; itérations</h3>
+          <div class="sub" data-i18n="method.2.sub">2 à 4 semaines</div>
         </div>
-        <p>Maquettes cliquables dans Figma, présentées page par page. Vous commentez, je corrige. On itère jusqu'à ce que chaque écran <span class="em">sonne juste</span> — avant d'écrire la moindre ligne de code.</p>
+        <p data-i18n="method.2.desc">Maquettes cliquables dans Figma, présentées page par page. Vous commentez, je corrige. On itère jusqu'à ce que chaque écran <span class="em">sonne juste</span> — avant d'écrire la moindre ligne de code.</p>
       </div>
       <div class="method-step" data-reveal data-reveal-delay="3">
         <div class="method-num">
@@ -3422,10 +3444,10 @@ footer {
           <span class="mn-text">03</span>
         </div>
         <div>
-          <h3>Développement</h3>
-          <div class="sub">3 à 8 semaines</div>
+          <h3 data-i18n="method.3.title">Développement</h3>
+          <div class="sub" data-i18n="method.3.sub">3 à 8 semaines</div>
         </div>
-        <p>Code propre, testé, commenté. Démos hebdomadaires en environnement de pré-production — vous voyez l'application grandir, pas juste apparaître au dernier jour.</p>
+        <p data-i18n="method.3.desc">Code propre, testé, commenté. Démos hebdomadaires en environnement de pré-production — vous voyez l'application grandir, pas juste apparaître au dernier jour.</p>
       </div>
       <div class="method-step" data-reveal data-reveal-delay="4">
         <div class="method-num">
@@ -3433,36 +3455,36 @@ footer {
           <span class="mn-text">04</span>
         </div>
         <div>
-          <h3>Mise en ligne &amp; suivi</h3>
-          <div class="sub">Continu</div>
+          <h3 data-i18n="method.4.title">Mise en ligne &amp; suivi</h3>
+          <div class="sub" data-i18n="method.4.sub">Continu</div>
         </div>
-        <p>Déploiement, monitoring, formation à l'outil. Je reste disponible après livraison — <span class="em">la mise en ligne n'est pas une fin, c'est une première version.</span></p>
+        <p data-i18n="method.4.desc">Déploiement, monitoring, formation à l'outil. Je reste disponible après livraison — <span class="em">la mise en ligne n'est pas une fin, c'est une première version.</span></p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═════════════════════ CONTACT ═════════════════════ -->
-<section class="section contact" id="contact" data-flash="Contact">
-  <span class="section-flash" aria-hidden="true">Contact — 05</span>
+<section class="section contact" id="contact" data-flash="Contact" data-flash-en="Contact">
+  <span class="section-flash" aria-hidden="true" data-i18n="flash.contact">Contact — 05</span>
   <div class="section-inner contact-inner">
     <div class="sh" data-reveal>
-      <span class="sh-tag">(05) Contact</span>
+      <span class="sh-tag" data-i18n="tag.contact">(05) Contact</span>
     </div>
-    <h2 class="contact-lead" data-reveal data-reveal-delay="1">
+    <h2 class="contact-lead" data-reveal data-reveal-delay="1" data-i18n="contact.lead">
       On construit<br>quelque chose<br>d'<span class="em">exceptionnel&nbsp;?</span>
     </h2>
     <div class="contact-grid">
       <div data-reveal data-reveal-delay="2">
-        <p class="contact-body">
+        <p class="contact-body" data-i18n="contact.body">
           Un site à lancer, une refonte à mener, un outil sur mesure à construire&nbsp;? Écrivez-moi. Je réponds sous 48 heures avec une lecture directe du chantier&nbsp;: périmètre, approche, délai, budget. Ce que je prends, je le livre.
         </p>
-        <a href="mailto:hello@leonbecquet.dev" class="contact-email" data-magnetic data-cursor="Envoyer">
+        <a href="mailto:hello@leonbecquet.dev" class="contact-email" data-magnetic data-cursor="Envoyer" data-i18n="contact.email">
           hello@leonbecquet.dev <span class="arrow">↗</span>
         </a>
         <div class="contact-avail">
           <div class="avail-dot"></div>
-          <div class="avail-text">
+          <div class="avail-text" data-i18n="contact.avail">
             <strong>Disponible pour nouveaux projets</strong>
             <span>Prochaine fenêtre&nbsp;: mai 2026</span>
           </div>
@@ -3492,9 +3514,9 @@ footer {
 
 <!-- ═════════════════════ FOOTER ═════════════════════ -->
 <footer>
-  <div class="foot-left">© 2026 — <strong>Léon Becquet</strong>. Tous droits réservés.</div>
+  <div class="foot-left" data-i18n="footer.copy">© 2026 — <strong>Léon Becquet</strong>. Tous droits réservés.</div>
   <div class="foot-center">
-    <a href="#top" class="back-top">↑ Retour en haut</a>
+    <a href="#top" class="back-top" data-i18n="footer.backtop">↑ Retour en haut</a>
   </div>
   <div class="foot-right">
     <a href="https://github.com/LeonBecquet" target="_blank" rel="noopener">GitHub</a>
@@ -4176,6 +4198,270 @@ function updateGridColor() {
 /* ═══ PAGE LOADED ═══ */
 window.addEventListener('load', () => document.body.classList.add('loaded'));
 setTimeout(() => document.body.classList.add('loaded'), 400);
+
+/* ═══ i18n — LANGUAGE TOGGLE ═══ */
+(function() {
+  const translations = {
+    // ── Nav
+    'nav.studio': 'Studio',
+    'nav.expertise': 'Expertise',
+    'nav.work': 'Work',
+    'nav.method': 'Method',
+    'nav.contact': 'Get in touch',
+
+    // ── Drawer (mobile)
+    'drawer.studio': 'Studio<span class="n">01</span>',
+    'drawer.expertise': 'Expertise<span class="n">02</span>',
+    'drawer.work': 'Work<span class="n">03</span>',
+    'drawer.method': 'Method<span class="n">04</span>',
+    'drawer.contact': 'Contact<span class="n">05</span>',
+    'drawer.cta': 'Get in touch <span>\u2197</span>',
+
+    // ── Section ticker
+    'ticker.opening': 'Opening',
+
+    // ── Section flashes
+    'flash.studio': 'Studio \u2014 01',
+    'flash.expertise': 'Expertise \u2014 02',
+    'flash.work': 'Work \u2014 03',
+    'flash.method': 'Method \u2014 04',
+    'flash.contact': 'Contact \u2014 05',
+
+    // ── Section tags
+    'tag.studio': '(01) Studio',
+    'tag.expertise': '(02) Expertise',
+    'tag.work': '(03) Work',
+    'tag.method': '(04) Method',
+    'tag.contact': '(05) Contact',
+
+    // ── Hero meta
+    'hero.meta.portfolio': 'Portfolio \u00b7 2026',
+    'hero.meta.studio': 'One-person studio<br>based in France',
+    'hero.meta.edition.label': 'Edition',
+    'hero.meta.edition.value': 'N\u00ba 04 \u2014 Spring 2026',
+    'hero.meta.status.label': 'Status',
+    'hero.meta.status.value': 'Available \u2014 booking<br>May through July',
+
+    // ── Hero title
+    'hero.title': '<span class="row row-1"><span class="mask d1"><span class="mask-inner">I build sites</span></span></span><span class="row row-2"><span class="mask d2"><span class="mask-inner">that leave</span></span></span><span class="row row-3"><span class="mask d3"><span class="mask-inner"><span class="serif-em">a mark.</span></span></span></span>',
+
+    // ── Hero lead
+    'hero.lead': '<strong>L\u00e9on Becquet</strong> \u2014 solo fullstack developer. I design and code bespoke websites, applications and web tools, crafted to the pixel and delivered turnkey. From first wireframe to launch \u2014 one point of contact, one clear direction.',
+
+    // ── Hero CTAs
+    'hero.cta.work': 'View work <span class="arrow">\u2197</span>',
+    'hero.cta.contact': 'Write to me',
+
+    // ── Hero stats
+    'hero.stat.years': 'Years of<br>practice',
+    'hero.stat.projects': 'Projects<br>delivered',
+    'hero.stat.custom': 'Fully<br>bespoke',
+
+    // ── Studio / Manifesto
+    'studio.title': 'A one-person<br><span class="em">studio</span>,<br>built to punch above its weight.',
+    'studio.lead': 'I believe a website is not a deliverable\u00a0: it\u2019s a <span class="em">living object</span> that carries a brand\u2019s voice. My role is to give it form, structure \u2014 and that subtle edge that makes it stick.',
+    'studio.body': '<p>For <strong>over four years</strong>, I\u2019ve worked with startups, agencies and brands to build their digital tools. I operate across the full cycle \u2014 strategy, design, development, launch \u2014 because owning the entire chain is how you prevent the gaps.</p><p>I work <strong>solo, directly with my clients</strong>. No middlemen, no layers, no hidden fees. One brief, one conversation, one delivery. The promise of a small studio without the fragility.</p><div class="manifesto-signature"><div class="signature-avatar">LB</div><div><div class="signature-name">L\u00e9on Becquet</div><div class="signature-role" data-i18n="studio.role">Developer & designer</div></div></div>',
+    'studio.role': 'Developer & designer',
+    'studio.pull.based.label': 'Based',
+    'studio.pull.based.value': 'France \u2014<br>available worldwide',
+    'studio.pull.specialties.label': 'Specialties',
+    'studio.pull.specialties.value': 'Front, back,<br>product design',
+    'studio.pull.clients.label': 'Clients',
+    'studio.pull.clients.value': 'Startups, agencies,<br>independent brands',
+    'studio.pull.approach.label': 'Approach',
+    'studio.pull.approach.value': 'Direct, iterative,<br>bespoke',
+
+    // ── Expertise
+    'expertise.title': 'The disciplines<br>of the <span class="em">studio</span>',
+    'expertise.1.title': 'Websites & web interfaces',
+    'expertise.1.desc': 'Corporate sites, landing pages, application dashboards. From atomic component to full design system \u2014 <span class="em">fluid, accessible, pixel-perfect.</span>',
+    'expertise.2.title': 'API & back-end architecture',
+    'expertise.2.desc': 'Databases, authentication, payments, third-party integrations. <span class="em">The invisible layer that holds everything together</span> \u2014 scalable, documented, built for peak loads.',
+    'expertise.3.title': 'Product design & UI',
+    'expertise.3.desc': 'Wireframes, interactive prototypes, component systems. Before writing a single line, I map the user journey in Figma <span class="em">until it feels right.</span>',
+    'expertise.4.title': 'Launch & performance',
+    'expertise.4.desc': 'Continuous deployment, load optimization, monitoring, technical SEO. <span class="em">The standard doesn\u2019t drop at the last line of code</span> \u2014 it starts at launch.',
+
+    // ── Work / Cases
+    'work.title': 'Selected<br><span class="em">case studies</span>',
+
+    // Case labels (shared)
+    'case.label.role': 'Role',
+    'case.label.year': 'Year',
+    'case.label.status': 'Status',
+    'case.label.team': 'Team',
+
+    // Supify
+    'case.supify.number': 'N\u00ba 001 / Social network',
+    'case.supify.tagline': 'The social network for music lovers.',
+    'case.supify.desc': 'Personalized feed, integrated player with waveform, track sharing, artist discovery. A living community around sound \u2014 designed for discovery, built to last.',
+    'case.supify.role': 'Design & fullstack dev',
+    'case.supify.status': 'In production',
+    'case.supify.link': 'View project <span class="arrow">\u2197</span>',
+
+    // Zetfar
+    'case.zetfar.number': 'N\u00ba 002 / Shopify e-commerce',
+    'case.zetfar.tagline': 'The official store of a creator with 2M subscribers.',
+    'case.zetfar.desc': 'Custom Shopify store for Zetfar, a gaming YouTuber with 2 million subscribers. Bespoke design aligned with the channel\u2019s universe, catalog management, conversion optimization, infrastructure ready for post-video traffic spikes.',
+    'case.zetfar.role': 'Design & Shopify dev',
+    'case.zetfar.status': 'In production',
+    'case.zetfar.link': 'View project <span class="arrow">\u2197</span>',
+
+    // NutriScan
+    'case.nutri.number': 'N\u00ba 003 / Mobile application',
+    'case.nutri.tagline': 'Scan before you eat.',
+    'case.nutri.desc': 'Instant nutritional analysis from a product photo. Health score, macronutrient tracking, scan history \u2014 for informed eating without the hassle.',
+    'case.nutri.role': 'Mobile & backend dev',
+    'case.nutri.status': 'MVP shipped',
+
+    // Forge Coaching
+    'case.forge.number': 'N\u00ba 004 / SaaS platform',
+    'case.forge.tagline': 'The daily tool for fitness coaches.',
+    'case.forge.desc': 'Personalized dashboard, session planning, goal tracking, integrated coach-client messaging. A purpose-built tool designed to replace the eternal spreadsheet that\u2019s been dragged around for too long.',
+    'case.forge.role': 'Design & fullstack dev',
+    'case.forge.status': 'In production',
+
+    // ── Schema: Supify visual
+    'schema.sup.online': '<span class="sup-dot"></span><strong>2 418</strong>online',
+    'schema.sup.playing': 'Now playing \u2014 Nova Eclipse',
+    'schema.sup.artist': 'Nova Eclipse \u00b7 Midnight Echoes',
+    'schema.sup.comments': '428 comments',
+    'schema.sup.friends': 'Friends \u2014 listening',
+
+    // ── Schema: Zetfar visual
+    'schema.zf.cart': 'Cart \u00b7 3',
+    'schema.zf.collection': 'Official collection',
+    'schema.zf.bestseller': 'Best-seller',
+    'schema.zf.new': 'New',
+    'schema.zf.cap': 'Cap Z',
+    'schema.zf.tee': 'Logo T-shirt',
+
+    // ── Schema: NutriScan visual
+    'schema.nut.category': 'Fruit \u00b7 Organic grocery',
+    'schema.nut.product': 'Pink Lady Apple',
+    'schema.nut.organic': 'Organic',
+    'schema.nut.pesticide': 'Pesticide-free',
+    'schema.nut.carbs': 'Carbs',
+    'schema.nut.fiber': 'Fiber',
+    'schema.nut.fats': 'Fats',
+
+    // ── Schema: Forge Coaching visual
+    'schema.frg.active': 'Active clients',
+    'schema.frg.active.trend': '+3 this month',
+    'schema.frg.goals': 'Goals',
+    'schema.frg.sessions': 'Sessions',
+    'schema.frg.progress': 'Monthly progress',
+    'schema.frg.today': 'Today',
+    'schema.frg.date': 'Thu. April 16',
+    'schema.frg.slot1.name': 'Sophie D. \u2014 Monthly review',
+    'schema.frg.slot1.type': 'Video call',
+    'schema.frg.slot2.name': 'Marc R. \u2014 Goal tracking',
+    'schema.frg.slot2.type': 'In-person',
+    'schema.frg.slot3.name': '\u00c9milie V. \u2014 Strength training',
+    'schema.frg.slot3.type': 'In-person',
+
+    // ── Kinetic divider
+    'kinetic.1': 'Crafted <span class="em">to the pixel</span> <span class="kinetic-star">\u2726</span>',
+    'kinetic.2': 'Delivered <span class="em">turnkey</span> <span class="kinetic-star">\u2726</span>',
+    'kinetic.3': 'One single <span class="em">point of contact</span> <span class="kinetic-star">\u2726</span>',
+    'kinetic.4': 'From <span class="em">idea</span> to code <span class="kinetic-star">\u2726</span>',
+
+    // ── Method
+    'method.title': 'How<br>I <span class="em">work</span>',
+    'method.0.title': 'First contact',
+    'method.0.sub': '30 min \u00b7 video call or coffee',
+    'method.0.desc': 'We talk about your project, your goals, your timeline. In 30 minutes, you walk away with a clear picture of what I can build for you \u2014 and how we get there.',
+    'method.1.title': 'Discovery & scoping',
+    'method.1.sub': '1 to 2 weeks',
+    'method.1.desc': 'Deep dive into your world. Benchmarks, information architecture, first wireframes. We lock in the direction <span class="em">before</span> we start building.',
+    'method.2.title': 'Design & iterations',
+    'method.2.sub': '2 to 4 weeks',
+    'method.2.desc': 'Clickable mockups in Figma, presented page by page. You comment, I refine. We iterate until every screen <span class="em">feels right</span> \u2014 before writing a single line of code.',
+    'method.3.title': 'Development',
+    'method.3.sub': '3 to 8 weeks',
+    'method.3.desc': 'Clean, tested, commented code. Weekly demos in a staging environment \u2014 you watch the application grow, not just appear on the last day.',
+    'method.4.title': 'Launch & ongoing support',
+    'method.4.sub': 'Ongoing',
+    'method.4.desc': 'Deployment, monitoring, tool training. I stay available after delivery \u2014 <span class="em">launch isn\u2019t an ending, it\u2019s a first version.</span>',
+
+    // ── Contact
+    'contact.lead': 'Let\u2019s build<br>something<br><span class="em">exceptional.</span>',
+    'contact.body': 'A site to launch, a redesign to lead, a custom tool to build? Write to me. I respond within 48 hours with a direct read of the project: scope, approach, timeline, budget. What I take on, I deliver.',
+    'contact.email': 'hello@leonbecquet.dev <span class="arrow">\u2197</span>',
+    'contact.avail': '<strong>Available for new projects</strong><span>Next window: May 2026</span>',
+
+    // ── Footer
+    'footer.copy': '\u00a9 2026 \u2014 <strong>L\u00e9on Becquet</strong>. All rights reserved.',
+    'footer.backtop': '\u2191 Back to top'
+  };
+
+  // ── State
+  const frCache = {};           // key -> original French innerHTML
+  let currentLang = 'fr';
+
+  // ── Save original French content
+  function cacheFrench() {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (!frCache[key]) {
+        frCache[key] = el.innerHTML;
+      }
+    });
+  }
+
+  // ── Apply language
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang === 'en' ? 'en' : 'fr';
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (lang === 'en' && translations[key]) {
+        el.innerHTML = translations[key];
+      } else if (lang === 'fr' && frCache[key]) {
+        el.innerHTML = frCache[key];
+      }
+    });
+
+    // Update section flash labels for the ticker system
+    document.querySelectorAll('[data-flash]').forEach(function(s) {
+      if (lang === 'en' && s.dataset.flashEn) {
+        s.dataset.flash = s.dataset.flashEn;
+      } else if (lang === 'fr') {
+        // Restore from the original values
+        var map = { studio: 'Studio', expertise: 'Expertise', travaux: 'Travaux', methode: 'M\u00e9thode', contact: 'Contact' };
+        var id = s.id;
+        if (map[id]) s.dataset.flash = map[id];
+      }
+    });
+
+    // Update toggle button active state
+    document.querySelectorAll('[data-lang-opt]').forEach(function(opt) {
+      opt.classList.toggle('active', opt.dataset.langOpt === lang);
+    });
+
+    try { localStorage.setItem('lang', lang); } catch(e) {}
+  }
+
+  // ── Init
+  cacheFrench();
+
+  // Bind toggle
+  var toggle = document.getElementById('langToggle');
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      applyLang(currentLang === 'fr' ? 'en' : 'fr');
+    });
+  }
+
+  // Check localStorage on load
+  try {
+    var saved = localStorage.getItem('lang');
+    if (saved === 'en') {
+      applyLang('en');
+    }
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>

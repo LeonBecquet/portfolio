@@ -69,6 +69,8 @@
   --grain-opacity: 0.055;
   --schema-supify-bg: radial-gradient(ellipse at 20% 0%, oklch(22% 0.04 160), oklch(11% 0.016 155) 55%, oklch(7% 0.01 150) 100%);
   --schema-supify-accent: oklch(74% 0.19 150);
+  --schema-zetfar-bg: linear-gradient(145deg, oklch(82% 0.16 75) 0%, oklch(72% 0.18 55) 55%, oklch(62% 0.19 40) 100%);
+  --schema-zetfar-accent: oklch(52% 0.2 25);
   --schema-nutri-bg: linear-gradient(165deg, oklch(99% 0.008 140) 0%, oklch(96% 0.018 150) 55%, oklch(93% 0.03 150) 100%);
   --schema-nutri-accent: oklch(56% 0.17 152);
   --schema-nutri-warn: oklch(72% 0.17 58);
@@ -99,6 +101,8 @@
   --grain-opacity: 0.08;
   --schema-supify-bg: radial-gradient(ellipse at 20% 0%, oklch(18% 0.035 160), oklch(9% 0.012 155) 55%, oklch(5% 0.008 150) 100%);
   --schema-supify-accent: oklch(76% 0.19 150);
+  --schema-zetfar-bg: linear-gradient(145deg, oklch(78% 0.15 75) 0%, oklch(68% 0.17 55) 55%, oklch(58% 0.18 40) 100%);
+  --schema-zetfar-accent: oklch(48% 0.2 25);
   --schema-nutri-bg: linear-gradient(165deg, oklch(96% 0.01 140) 0%, oklch(93% 0.02 150) 55%, oklch(89% 0.035 150) 100%);
   --schema-nutri-accent: oklch(56% 0.17 152);
   --schema-nutri-warn: oklch(72% 0.17 58);
@@ -1867,6 +1871,86 @@ nav {
   50% { transform: scaleY(1); }
 }
 
+/* ═══ SCHEMA : ZETFAR — e-commerce / Shopify ═══ */
+.schema-zetfar {
+  background: var(--schema-zetfar-bg);
+  color: oklch(18% 0.02 50);
+  container-type: inline-size;
+  --zf: var(--schema-zetfar-accent);
+}
+.schema-zetfar .schema-grid { color: oklch(100% 0 0); opacity: 0.06; }
+.schema-zetfar .schema-watermark { color: oklch(18% 0.03 50); opacity: 0.06; font-size: clamp(3rem, 18cqw, 11rem); }
+
+.zf-bar {
+  position: absolute; top: clamp(0.9rem, 3cqw, 1.5rem); left: clamp(0.9rem, 3cqw, 1.5rem); right: clamp(0.9rem, 3cqw, 1.5rem);
+  display: flex; justify-content: space-between; align-items: center; z-index: 4;
+}
+.zf-brand {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--display); font-weight: 800; font-size: clamp(0.8rem, 2cqw, 1.1rem);
+  letter-spacing: 0.04em; text-transform: uppercase; color: oklch(18% 0.03 50);
+}
+.zf-logo {
+  width: clamp(18px, 3cqw, 26px); height: clamp(18px, 3cqw, 26px);
+  border-radius: 6px; background: oklch(18% 0.03 50);
+  color: oklch(85% 0.15 75); display: grid; place-items: center;
+  font-family: var(--display); font-weight: 800; font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
+}
+.zf-cart {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-family: var(--mono); font-size: clamp(0.5rem, 1.2cqw, 0.65rem);
+  background: oklch(18% 0.03 50); color: oklch(85% 0.15 75);
+  padding: 0.35rem 0.7rem; border-radius: 999px; font-weight: 500;
+}
+
+.zf-hero {
+  position: absolute; top: 20%; left: clamp(0.9rem, 3cqw, 1.5rem); right: clamp(0.9rem, 3cqw, 1.5rem);
+  z-index: 3; text-align: center;
+}
+.zf-hero-title {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.2rem, 5cqw, 3rem); letter-spacing: -0.02em;
+  color: oklch(18% 0.03 50); line-height: 1;
+  text-shadow: 0 2px 20px oklch(80% 0.15 75 / 0.3);
+}
+.zf-hero-sub {
+  font-family: var(--body); font-size: clamp(0.5rem, 1.3cqw, 0.75rem);
+  margin-top: 0.5rem; color: oklch(25% 0.04 50); opacity: 0.7;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+.zf-products {
+  position: absolute; bottom: clamp(0.9rem, 3cqw, 1.5rem); left: clamp(0.9rem, 3cqw, 1.5rem); right: clamp(0.9rem, 3cqw, 1.5rem);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1cqw, 0.8rem); z-index: 4;
+}
+.zf-product {
+  background: oklch(100% 0 0 / 0.25); backdrop-filter: blur(8px);
+  border-radius: clamp(6px, 1.2cqw, 10px); padding: clamp(0.4rem, 1.2cqw, 0.8rem);
+  border: 1px solid oklch(100% 0 0 / 0.2);
+}
+.zf-product-img {
+  width: 100%; aspect-ratio: 1; border-radius: clamp(4px, 0.8cqw, 6px);
+  margin-bottom: clamp(0.3rem, 0.8cqw, 0.5rem);
+}
+.zf-product-img.hoodie { background: oklch(35% 0.08 260); }
+.zf-product-img.cap { background: var(--zf); }
+.zf-product-img.tee { background: oklch(92% 0.02 75); }
+.zf-product-name {
+  font-family: var(--body); font-weight: 600; font-size: clamp(0.45rem, 1.1cqw, 0.65rem);
+  color: oklch(18% 0.03 50); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.zf-product-price {
+  font-family: var(--mono); font-weight: 500; font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
+  color: oklch(18% 0.03 50); margin-top: 0.15rem;
+}
+.zf-badge {
+  display: inline-block; font-family: var(--mono); font-size: clamp(0.35rem, 0.8cqw, 0.5rem);
+  padding: 0.15rem 0.4rem; border-radius: 999px; margin-top: 0.25rem;
+  font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.zf-badge.sold { background: oklch(18% 0.03 50 / 0.12); color: oklch(18% 0.03 50); }
+.zf-badge.new { background: var(--zf); color: oklch(98% 0 0); }
+
 /* ═══ SCHEMA : NUTRISCAN — light health app ═══ */
 .schema-nutri {
   background: var(--schema-nutri-bg);
@@ -3036,7 +3120,72 @@ footer {
       </div>
     </article>
 
-    <!-- ══ CASE 002 : NUTRISCAN ══ -->
+    <!-- ══ CASE 002 : ZETFAR ══ -->
+    <article class="case reverse" data-reveal>
+      <div class="case-visual">
+        <span class="crn tl" aria-hidden="true"></span>
+        <span class="crn tr" aria-hidden="true"></span>
+        <span class="crn bl" aria-hidden="true"></span>
+        <span class="crn br" aria-hidden="true"></span>
+        <div class="schema schema-zetfar">
+          <div class="schema-grid"></div>
+          <div class="schema-watermark">ZETFAR</div>
+          <div class="schema-grain"></div>
+
+          <div class="zf-bar">
+            <div class="zf-brand"><span class="zf-logo">Z</span>ZETFAR</div>
+            <div class="zf-cart">Panier · 3</div>
+          </div>
+
+          <div class="zf-hero">
+            <div class="zf-hero-title">ZETFAR</div>
+            <div class="zf-hero-sub">Collection officielle</div>
+          </div>
+
+          <div class="zf-products">
+            <div class="zf-product">
+              <div class="zf-product-img hoodie"></div>
+              <div class="zf-product-name">Hoodie Classic</div>
+              <div class="zf-product-price">39,90€</div>
+              <span class="zf-badge sold">Best-seller</span>
+            </div>
+            <div class="zf-product">
+              <div class="zf-product-img cap"></div>
+              <div class="zf-product-name">Casquette Z</div>
+              <div class="zf-product-price">24,90€</div>
+              <span class="zf-badge new">Nouveau</span>
+            </div>
+            <div class="zf-product">
+              <div class="zf-product-img tee"></div>
+              <div class="zf-product-name">Tee-shirt Logo</div>
+              <div class="zf-product-price">29,90€</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-number">Nº 002 / E-commerce Shopify</div>
+        <h3 class="case-name">Zetfar</h3>
+        <p class="case-tagline">La boutique officielle d'un créateur à 2M d'abonnés.</p>
+        <p class="case-desc">
+          Boutique Shopify sur mesure pour Zetfar, youtubeur gaming à 2 millions d'abonnés. Design custom aligné avec l'univers de la chaîne, gestion du catalogue, optimisation conversion, infrastructure prête pour les pics de trafic post-vidéo.
+        </p>
+        <div class="case-meta">
+          <div><span class="k">Rôle</span><span class="v">Conception &amp; dev Shopify</span></div>
+          <div><span class="k">Année</span><span class="v">2024 — 2025</span></div>
+          <div><span class="k">Statut</span><span class="v">En production</span></div>
+          <div><span class="k">Équipe</span><span class="v">Solo</span></div>
+        </div>
+        <div class="case-stack">
+          <span>Shopify</span><span>Liquid</span><span>JavaScript</span><span>CSS</span><span>Figma</span>
+        </div>
+        <a href="https://zetfar.com/" target="_blank" rel="noopener" class="case-link" data-magnetic data-cursor="Visiter">
+          Voir le projet <span class="arrow">↗</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- ══ CASE 003 : NUTRISCAN ══ -->
     <article class="case reverse" data-reveal>
       <div class="case-visual">
         <span class="crn tl" aria-hidden="true"></span>
@@ -3093,7 +3242,7 @@ footer {
         </div>
       </div>
       <div class="case-body">
-        <div class="case-number">Nº 002 / Application mobile</div>
+        <div class="case-number">Nº 003 / Application mobile</div>
         <h3 class="case-name">NutriScan</h3>
         <p class="case-tagline">Scanner avant de manger.</p>
         <p class="case-desc">
@@ -3190,7 +3339,7 @@ footer {
         </div>
       </div>
       <div class="case-body">
-        <div class="case-number">Nº 003 / Plateforme SaaS</div>
+        <div class="case-number">Nº 004 / Plateforme SaaS</div>
         <h3 class="case-name">Forge Coaching</h3>
         <p class="case-tagline">L'outil quotidien des coachs sportifs.</p>
         <p class="case-desc">
@@ -3243,7 +3392,7 @@ footer {
           <h3>Premier contact</h3>
           <div class="sub">30 min · visio ou café</div>
         </div>
-        <p>On échange sur votre projet, votre contexte, votre budget. Je vous dis franchement si c'est quelque chose que je peux livrer — ou à qui je vous renverrais.</p>
+        <p>On parle de votre projet, vos objectifs, vos délais. En 30 minutes, vous repartez avec une vision claire de ce que je peux construire pour vous — et comment on s'y prend.</p>
       </div>
       <div class="method-step" data-reveal data-reveal-delay="1">
         <div class="method-num">

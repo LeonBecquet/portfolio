@@ -1888,85 +1888,14 @@ nav {
   50% { transform: scaleY(1); }
 }
 
-/* ═══ SCHEMA : ZETFAR — e-commerce / Shopify ═══ */
-.schema-zetfar {
-  background: var(--schema-zetfar-bg);
-  color: oklch(18% 0.02 50);
-  container-type: inline-size;
-  --zf: var(--schema-zetfar-accent);
+/* ═══ SCHEMA : ZETFAR — screenshot ═══ */
+.schema-zetfar-img {
+  background: linear-gradient(145deg, oklch(82% 0.16 75), oklch(72% 0.18 55));
+  overflow: hidden;
 }
-.schema-zetfar .schema-grid { color: oklch(100% 0 0); opacity: 0.06; }
-.schema-zetfar .schema-watermark { color: oklch(18% 0.03 50); opacity: 0.06; font-size: clamp(3rem, 18cqw, 11rem); }
-
-.zf-bar {
-  position: absolute; top: clamp(0.9rem, 3cqw, 1.5rem); left: clamp(0.9rem, 3cqw, 1.5rem); right: clamp(0.9rem, 3cqw, 1.5rem);
-  display: flex; justify-content: space-between; align-items: center; z-index: 4;
+.schema-zetfar-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
-.zf-brand {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-family: var(--display); font-weight: 800; font-size: clamp(0.8rem, 2cqw, 1.1rem);
-  letter-spacing: 0.04em; text-transform: uppercase; color: oklch(18% 0.03 50);
-}
-.zf-logo {
-  width: clamp(18px, 3cqw, 26px); height: clamp(18px, 3cqw, 26px);
-  border-radius: 6px; background: oklch(18% 0.03 50);
-  color: oklch(85% 0.15 75); display: grid; place-items: center;
-  font-family: var(--display); font-weight: 800; font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
-}
-.zf-cart {
-  display: flex; align-items: center; gap: 0.4rem;
-  font-family: var(--mono); font-size: clamp(0.5rem, 1.2cqw, 0.65rem);
-  background: oklch(18% 0.03 50); color: oklch(85% 0.15 75);
-  padding: 0.35rem 0.7rem; border-radius: 999px; font-weight: 500;
-}
-
-.zf-hero {
-  position: absolute; top: 20%; left: clamp(0.9rem, 3cqw, 1.5rem); right: clamp(0.9rem, 3cqw, 1.5rem);
-  z-index: 3; text-align: center;
-}
-.zf-hero-title {
-  font-family: var(--display); font-weight: 800;
-  font-size: clamp(1.2rem, 5cqw, 3rem); letter-spacing: -0.02em;
-  color: oklch(18% 0.03 50); line-height: 1;
-  text-shadow: 0 2px 20px oklch(80% 0.15 75 / 0.3);
-}
-.zf-hero-sub {
-  font-family: var(--body); font-size: clamp(0.5rem, 1.3cqw, 0.75rem);
-  margin-top: 0.5rem; color: oklch(25% 0.04 50); opacity: 0.7;
-  letter-spacing: 0.08em; text-transform: uppercase;
-}
-
-.zf-products {
-  position: absolute; bottom: clamp(0.9rem, 3cqw, 1.5rem); left: clamp(0.9rem, 3cqw, 1.5rem); right: clamp(0.9rem, 3cqw, 1.5rem);
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.4rem, 1cqw, 0.8rem); z-index: 4;
-}
-.zf-product {
-  background: oklch(100% 0 0 / 0.25); backdrop-filter: blur(8px);
-  border-radius: clamp(6px, 1.2cqw, 10px); padding: clamp(0.4rem, 1.2cqw, 0.8rem);
-  border: 1px solid oklch(100% 0 0 / 0.2);
-}
-.zf-product-img {
-  width: 100%; aspect-ratio: 1; border-radius: clamp(4px, 0.8cqw, 6px);
-  margin-bottom: clamp(0.3rem, 0.8cqw, 0.5rem);
-}
-.zf-product-img.hoodie { background: oklch(35% 0.08 260); }
-.zf-product-img.cap { background: var(--zf); }
-.zf-product-img.tee { background: oklch(92% 0.02 75); }
-.zf-product-name {
-  font-family: var(--body); font-weight: 600; font-size: clamp(0.45rem, 1.1cqw, 0.65rem);
-  color: oklch(18% 0.03 50); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.zf-product-price {
-  font-family: var(--mono); font-weight: 500; font-size: clamp(0.5rem, 1.2cqw, 0.7rem);
-  color: oklch(18% 0.03 50); margin-top: 0.15rem;
-}
-.zf-badge {
-  display: inline-block; font-family: var(--mono); font-size: clamp(0.35rem, 0.8cqw, 0.5rem);
-  padding: 0.15rem 0.4rem; border-radius: 999px; margin-top: 0.25rem;
-  font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
-}
-.zf-badge.sold { background: oklch(18% 0.03 50 / 0.12); color: oklch(18% 0.03 50); }
-.zf-badge.new { background: var(--zf); color: oklch(98% 0 0); }
 
 /* ═══ SCHEMA : NUTRISCAN — light health app ═══ */
 .schema-nutri {
@@ -3149,40 +3078,8 @@ footer {
         <span class="crn tr" aria-hidden="true"></span>
         <span class="crn bl" aria-hidden="true"></span>
         <span class="crn br" aria-hidden="true"></span>
-        <div class="schema schema-zetfar">
-          <div class="schema-grid"></div>
-          <div class="schema-watermark">ZETFAR</div>
-          <div class="schema-grain"></div>
-
-          <div class="zf-bar">
-            <div class="zf-brand"><span class="zf-logo">Z</span>ZETFAR</div>
-            <div class="zf-cart" data-i18n="schema.zf.cart">Panier · 3</div>
-          </div>
-
-          <div class="zf-hero">
-            <div class="zf-hero-title">ZETFAR</div>
-            <div class="zf-hero-sub" data-i18n="schema.zf.collection">Collection officielle</div>
-          </div>
-
-          <div class="zf-products">
-            <div class="zf-product">
-              <div class="zf-product-img hoodie"></div>
-              <div class="zf-product-name">Hoodie Classic</div>
-              <div class="zf-product-price">39,90€</div>
-              <span class="zf-badge sold" data-i18n="schema.zf.bestseller">Best-seller</span>
-            </div>
-            <div class="zf-product">
-              <div class="zf-product-img cap"></div>
-              <div class="zf-product-name" data-i18n="schema.zf.cap">Casquette Z</div>
-              <div class="zf-product-price">24,90€</div>
-              <span class="zf-badge new" data-i18n="schema.zf.new">Nouveau</span>
-            </div>
-            <div class="zf-product">
-              <div class="zf-product-img tee"></div>
-              <div class="zf-product-name" data-i18n="schema.zf.tee">Tee-shirt Logo</div>
-              <div class="zf-product-price">29,90€</div>
-            </div>
-          </div>
+        <div class="schema schema-zetfar-img">
+          <img src="/zetfar-hero.png" alt="Zetfar — Boutique Shopify officielle" loading="lazy" draggable="false">
         </div>
       </div>
       <div class="case-body">
@@ -4327,14 +4224,6 @@ setTimeout(() => document.body.classList.add('loaded'), 400);
     'schema.sup.artist': 'Nova Eclipse \u00b7 Midnight Echoes',
     'schema.sup.comments': '428 comments',
     'schema.sup.friends': 'Friends \u2014 listening',
-
-    // ── Schema: Zetfar visual
-    'schema.zf.cart': 'Cart \u00b7 3',
-    'schema.zf.collection': 'Official collection',
-    'schema.zf.bestseller': 'Best-seller',
-    'schema.zf.new': 'New',
-    'schema.zf.cap': 'Cap Z',
-    'schema.zf.tee': 'Logo T-shirt',
 
     // ── Schema: NutriScan visual
     'schema.nut.category': 'Fruit \u00b7 Organic grocery',

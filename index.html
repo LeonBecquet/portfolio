@@ -1648,12 +1648,15 @@ nav {
 
 /* ═══ SCHEMA : SUPIFY — screenshot ═══ */
 .schema-supify-img {
-  background: oklch(12% 0.03 280);
+  background: oklch(6% 0.02 280);
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
 }
 .schema-supify-img img {
   width: 100%; height: 100%; object-fit: contain; display: block;
+}
+[data-theme="dark"] .schema-supify-img img {
+  filter: contrast(1.15) brightness(0.9);
 }
 
 /* ═══ SCHEMA : ZETFAR — screenshot ═══ */
